@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NAME}} | {{TITLE}}</title>
+    <meta name="description" content="{{BIO_SHORT}}">
+
+    <!-- CSS Stylesheet (Injected at build time) -->
+    <style>
+        {{STYLES}}
+    </style>
+
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <!-- PrismJS for sleek syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    
+    <!-- Inline script to set theme early to prevent flickering -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 
+                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Minimal Header -->
+    <header class="site-header">
+        <div class="logo">
+            <h1><a href="#about">{{NAME}}</a></h1>
+            <p>{{TITLE}}</p>
+        </div>
+        <div class="nav-container">
+            <nav class="main-nav" id="main-nav">
+                <a href="#about" class="nav-link" data-target="about">About</a>
+                <a href="#projects" class="nav-link" data-target="projects">Projects & Research</a>
+                <a href="#writing" class="nav-link" data-target="writing">Writing</a>
+                <a href="#cv" class="nav-link" data-target="cv">CV</a>
+            </nav>
+            
+            <!-- Dark Mode Toggle Button -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+                <!-- Sun Icon -->
+                <svg class="sun-icon" viewBox="0 0 24 24" style="display: none;">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                </svg>
+                <!-- Moon Icon -->
+                <svg class="moon-icon" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+
+        <!-- SECTION 1: ABOUT -->
+        <section id="page-about" class="page-section active">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Overview</h2>
+                    <div class="bio-lead">
+                        {{ABOUT_LEAD}}
+                    </div>
+                    <div class="bio-body">
+                        {{ABOUT_BODY}}
+                    </div>
+                    <div class="acknowledgements-section" style="margin-top: 3rem;">
+                        <h2 class="section-title">Acknowledgements</h2>
+                        <div class="markdown-body" style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);">
+                            {{ACKNOWLEDGEMENTS}}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">Focus Pillars</h2>
+                    <div class="pillars-container">
+                        {{PILLARS}}
+                    </div>
+                    
+                    {{PATENT_NOTICE}}
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PROJECTS & RESEARCH -->
+        <section id="page-projects" class="page-section">
+            <h2 class="section-title" style="margin-bottom: 2.5rem;">Case Studies & Hardware</h2>
+            <div class="projects-list">
+                {{PROJECTS}}
+            </div>
+        </section>
+
+        <!-- SECTION 3: WRITING -->
+        <section id="page-writing" class="page-section">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Essays & Notes</h2>
+                    <div class="essays-list">
+                        {{ESSAYS}}
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">Publications & Patents</h2>
+                    <div class="sidebar-section">
+                        <ul class="sidebar-list">
+                            {{PUBLICATIONS_LIST}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CV -->
+        <section id="page-cv" class="page-section">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Professional Timeline</h2>
+                    <div class="timeline">
+                        {{CV_TIMELINE}}
+                    </div>
+                </div>
+                <div>
+                    {{SIDEBAR}}
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FULL ARTICLE READER -->
+        <section id="article-reader-container" class="page-section" style="max-width: 850px; margin: 0 auto; padding-top: 1rem;">
+            <div id="full-article-content">
+                {{FULL_ARTICLES}}
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 {{NAME}}. Typeset in Lora & Inter. Built from local career assets.</p>
+        <div class="social-links">
+            <a href="{{LINKEDIN}}" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="{{GITHUB}}" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Client-Side Router & UI Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Switcher ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+            const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+            function updateToggleIcons(theme) {
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                } else {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                }
+            }
+
+            // Get initial state
+            let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            updateToggleIcons(currentTheme);
+
+            // Toggle theme click handler
+            themeToggleBtn.addEventListener('click', () => {
+                const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('theme', nextTheme);
+                currentTheme = nextTheme;
+                updateToggleIcons(currentTheme);
+            });
+
+            // --- Client-Side Router ---
+            function handleRouting() {
+                let hash = window.location.hash.substring(1) || 'about';
+                
+                // Check if it is an article sub-route (e.g. #writing/igbt-desat-forensics)
+                if (hash.startsWith('writing/')) {
+                    const slug = hash.substring(8);
+                    
+                    // Hide all main page sections
+                    document.querySelectorAll('.page-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show article reader section
+                    const reader = document.getElementById('article-reader-container');
+                    if (reader) {
+                        reader.classList.add('active');
+                    }
+                    
+                    // Hide all full articles inside the container
+                    document.querySelectorAll('.full-article-page').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    
+                    // Show specific article
+                    const targetArticle = document.getElementById('article-' + slug);
+                    if (targetArticle) {
+                        targetArticle.style.display = 'block';
+                        
+                        // Highlight code blocks on demand
+                        if (window.Prism) Prism.highlightAllUnder(targetArticle);
+                        
+                        // Render LaTeX equations on demand
+                        if (window.renderMathInElement) {
+                            renderMathInElement(targetArticle, {
+                                delimiters: [
+                                    {left: '$$', right: '$$', display: true},
+                                    {left: '$', right: '$', display: false}
+                                ]
+                            });
+                        }
+                    }
+                    
+                    // Deactivate active links in main menu
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                
+                // Hide article reader if showing normal page
+                const reader = document.getElementById('article-reader-container');
+                if (reader) {
+                    reader.classList.remove('active');
+                }
+
+                // Standard SPA section toggle
+                const validSections = ['about', 'projects', 'writing', 'cv'];
+                if (!validSections.includes(hash)) {
+                    hash = 'about';
+                }
+
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show active section
+                const activeSection = document.getElementById('page-' + hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+
+                // Update navigation active states
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-target') === hash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Route initial load and hash changes
+            window.addEventListener('hashchange', handleRouting);
+            handleRouting();
+        });
+
+        // Global toggle for series expansions
+        function toggleSeriesExpansion(id) {
+            const content = document.getElementById(id);
+            const btn = document.getElementById('btn-explore-' + id);
+            const arrow = btn.querySelector('.arrow');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                arrow.innerHTML = '&#9652;'; // up arrow
+                btn.style.color = 'var(--accent)';
+            } else {
+                content.style.display = 'none';
+                arrow.innerHTML = '&#9662;'; // down arrow
+                btn.style.color = 'var(--text-muted)';
+            }
+        }
+
+        // Go back to writing tab and scroll to a specific series
+        function goBackToSeries(seriesId) {
+            window.location.hash = '#writing';
+            setTimeout(() => {
+                const target = document.getElementById(seriesId);
+                if (target) {
+                    // Open the series if it is collapsed
+                    const expansionId = 'expand-' + seriesId;
+                    const content = document.getElementById(expansionId);
+                    if (content && (content.style.display === 'none' || content.style.display === '')) {
+                        toggleSeriesExpansion(expansionId);
+                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

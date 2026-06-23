@@ -1,0 +1,125 @@
+{
+    "profile": {
+        "name": "Hafis Umar-Lawal",
+        "title": "Power Electronics & Hardware Engineer",
+        "location": "Montreal, Quebec, Canada",
+        "email": "Contact details on LinkedIn",
+        "linkedin": "https://www.linkedin.com/in/hafis-u-33a31796/",
+        "github": "https://github.com/omo-wura",
+        "about": "Power Electronics & Hardware Engineer specializing in the design, failure forensics, and operational lifecycle governance of safety-critical, high-density power conversion systems. Experienced in taking products from paper specifications through simulation, multi-layer PCB layout, firmware co-design, safety certifications, and manufacturing handover. Certified TÜV SÜD Functional Safety Engineer with deep expertise in residential microgrids, battery cyclers, and space avionics.",
+        "pillars": [
+            {
+                "title": "Power Conversion Stage Design",
+                "description": "Design of bidirectional high-density converters (up to 14kW, including GaN stages at 500kHz), active precharge loops, relay coil economization, and integrated magnetic cores."
+            },
+            {
+                "title": "Failure Analysis & Diagnostics (Forensics)",
+                "description": "Applying first-principles physical analysis to debug transient anomalies, IGBT desaturation dynamics, closed-loop instability, and EMI/EMC issues (UL 1741, UL 60730, FCC Part 15)."
+            },
+            {
+                "title": "Operational Governance & CAD Management",
+                "description": "Managing CAD component library databases (Altium 365 DBLib), component template parameters, and gatekeeping release pipelines via ECO workflows in PLM software (Arena)."
+            }
+        ],
+        "languages": [
+            {"language": "English", "proficiency": "Native or bilingual"},
+            {"language": "Yoruba", "proficiency": "Native or bilingual"},
+            {"language": "French", "proficiency": "Elementary proficiency"}
+        ]
+    },
+    "skills": {
+        "Hardware & Power Design": [
+            "Altium Designer",
+            "Multi-layer PCB Layout",
+            "High-Voltage Creepage/Clearance",
+            "GaN Switching (500kHz)",
+            "Integrated Magnetics Design",
+            "Active Precharge Circuits",
+            "Thermal Management (TIMs)",
+            "EMI/EMC Filter Design"
+        ],
+        "Firmware & Simulation": [
+            "Bare-metal C / C++",
+            "Mixed Assembly (C/ASM)",
+            "TI C2000 MCUs (Delfino)",
+            "STM32 & MSP430 MCUs",
+            "LTspice Simulation",
+            "PLECS / MATLAB / Simulink",
+            "CAN Bus Network Design",
+            "Power Line Communication (PLC)"
+        ],
+        "Governance & Standards": [
+            "TÜV SÜD Functional Safety",
+            "UL 1741 / UL 60730 Class B",
+            "FCC Part 15 Compliance",
+            "Arena PLM",
+            "ECO Workflow Management",
+            "Altium 365 Library (DBLib)"
+        ]
+    },
+    "education": [
+        {
+            "institution": "University of Manitoba",
+            "degree": "Master of Science (M.Sc.) in Electrical and Computer Engineering",
+            "period": "2018 - 2021",
+            "focus": "Solar micro-inverters & integrated magnetics",
+            "courses": [
+                "Applied Power Electronics (ECE 7440)",
+                "Embedded Systems Engineering (ECE 7180)",
+                "Modern Control for Power Electronic Systems",
+                "Modular Multilevel Converters"
+            ]
+        },
+        {
+            "institution": "University of Manitoba",
+            "degree": "Bachelor of Science (B.Sc.) in Electrical Engineering (With Distinction)",
+            "period": "2013 - 2018",
+            "focus": "Power and Energy systems",
+            "honors": "Graduated with a DGPA of 3.80 or higher"
+        }
+    ],
+    "certifications": [
+        {
+            "name": "Functional Safety Engineer",
+            "issuer": "TÜV SÜD",
+            "details": "Certified Functional Safety Engineer; applied safety lifecycle governance to residential microgrid software and hardware designs to satisfy UL 60730 Class B requirements.",
+            "pdf": "assets/certificates/tuv-sud-fusa.pdf"
+        },
+        {
+            "name": "EMC Filter Design",
+            "issuer": "Biricha Digital Power",
+            "issue_date": "Oct 2025",
+            "details": "Focused on the analytical design of input/output DC/DC and AC/DC EMI filters to meet compliance specifications for EU/FCC conducted emission tests.",
+            "pdf": "assets/certificates/biricha-emc-filter-design.pdf"
+        },
+        {
+            "name": "Design for EMI/EMC",
+            "issuer": "HF magic Lab S.L",
+            "issue_date": "Jul 2025",
+            "details": "Product layout and circuit design methodology to mitigate electromagnetic interference, utilizing circuit simulations and hardware debugging tools.",
+            "pdf": "assets/certificates/hf-magic-lab-emi-emc.pdf"
+        }
+    ],
+    "patents": [
+        {
+            "number": "US Patent 12,658,699",
+            "title": "Photovoltaic power optimizer with overvoltage protection control and rapid shutdown device",
+            "date": "Issued June 2026",
+            "details": "Co-invented with R. Hesaraki, E. Montllo Casabayo, and C. Wauthy. Assigned to dcbel."
+        }
+    ],
+    "publications": [
+        {
+            "title": "Design and implementation of a grid-connected solar micro-inverter using a single-stage galvanically isolated topology with integrated magnetics",
+            "publisher": "University of Manitoba",
+            "date": "May 2021",
+            "type": "Master's Thesis"
+        },
+        {
+            "title": "An Isolated Single Stage Single Phase Micro-Inverter topology with integrated magnetics",
+            "publisher": "IEEE Energy Conversion Congress and Exposition (ECCE)",
+            "date": "Sep 2019",
+            "type": "Conference Paper"
+        }
+    ]
+}

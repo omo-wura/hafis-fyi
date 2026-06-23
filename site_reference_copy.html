@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafis Kolapo Umar-Lawal | Power Electronics</title>
+    
+    <!-- Google Fonts: Lora (Serif body), Inter (UI/Nav), JetBrains Mono (Code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <!-- PrismJS for sleek syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        paper: '#FCFCFB',     
+                        accent: '#0055FF',    
+                        ink: {
+                            900: '#111111',   
+                            800: '#2D2D2D',   
+                            500: '#71717A',   
+                            300: '#D4D4D8',   
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sleek-link {
+            text-decoration: none;
+            background-image: linear-gradient(to right, theme('colors.ink.300'), theme('colors.ink.300'));
+            background-position: bottom 2px left 0;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            transition: background-size 0.2s ease, color 0.2s ease, background-image 0.2s ease;
+        }
+        .sleek-link:hover {
+            background-size: 100% 2px;
+            color: theme('colors.accent');
+            background-image: linear-gradient(to right, theme('colors.accent'), theme('colors.accent'));
+        }
+        
+        ::selection {
+            background-color: #E2E8F0;
+            color: #000;
+        }
+
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 4px;
+            background: #1A1B1E;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* SPA Transition styles */
+        .page-section {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link.active {
+            color: theme('colors.accent');
+        }
+    </style>
+</head>
+<body class="bg-paper text-ink-800 font-serif antialiased selection:bg-slate-200 min-h-screen flex flex-col">
+
+    <!-- Minimal Navigation -->
+    <header class="w-full max-w-6xl mx-auto px-6 pt-10 pb-6 md:pt-14 md:pb-8 flex flex-col md:flex-row justify-between items-start md:items-center font-sans border-b border-ink-300/20 md:border-none">
+        <div class="mb-6 md:mb-0">
+            <h1 class="text-2xl font-extrabold tracking-tight text-ink-900"><a href="#about" class="hover:text-accent transition-colors">Hafis Kolapo Umar-Lawal</a></h1>
+            <p class="text-sm text-ink-500 font-medium mt-1">Power Electronics Developer &bull; Bidirectional Converters</p>
+        </div>
+        <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-ink-500" id="main-nav">
+            <a href="#about" class="nav-link hover:text-accent transition-colors" data-target="about">About</a>
+            <a href="#projects" class="nav-link hover:text-accent transition-colors" data-target="projects">Hardware & Research</a>
+            <a href="#writing" class="nav-link hover:text-accent transition-colors" data-target="writing">Writing</a>
+            <a href="#cv" class="nav-link hover:text-accent transition-colors" data-target="cv">CV</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="w-full max-w-6xl mx-auto px-6 pb-32 flex-1">
+
+        <!-- PAGE 1: ABOUT -->
+        <div id="page-about" class="page-section active">
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 border-t border-ink-300/40 pt-8">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-6">Overview</h2>
+                    <p class="text-lg leading-loose mb-6">
+                        I am a Power Electronics Developer driven by the challenge of bridging rigorous academic theory with reliable, consumer-ready hardware. My work focuses on high-efficiency bidirectional converters, renewable energy integration, and smart home ecosystems.
+                    </p>
+                    <p class="text-lg leading-loose mb-6">
+                        Currently, I build bidirectional power architectures at <a href="#" class="sleek-link font-medium text-ink-900">dcbel</a>, developing V2H/V2G (Vehicle-to-Home/Grid) technologies and photovoltaic optimizers. The core of my engineering philosophy relies on pushing the physical limits of topologies—shrinking component footprints, managing brutal thermal constraints, and enforcing strict safety controls in series-loop PV systems.
+                    </p>
+                    <p class="text-lg leading-loose">
+                        Before my work in industry, I conducted research at the University of Manitoba's RIGA Lab under Dr. Carl Ho, focusing on single-stage galvanically isolated micro-inverters, and designed satellite avionics for the Canadian Space Agency's CubeSat Project.
+                    </p>
+                </div>
+                
+                <aside class="md:col-span-4 lg:col-span-4 lg:col-start-9 flex flex-col justify-end md:mt-12">
+                    <div class="pl-4 border-l border-ink-300/50">
+                        <p class="font-sans text-xs leading-relaxed text-ink-500">
+                            <span class="block font-bold text-ink-900 mb-1 text-sm">Recently Issued</span>
+                            <strong class="text-accent">US Patent 12,658,699</strong><br>
+                            Photovoltaic power optimizer with overvoltage protection control and rapid shutdown device. Issued June 2026.
+                        </p>
+                        <a href="#projects" class="font-sans text-xs font-bold text-accent mt-3 inline-block hover:underline">Read the technical brief &rarr;</a>
+                    </div>
+                </aside>
+            </article>
+        </div>
+
+        <!-- PAGE 2: PROJECTS & HARDWARE -->
+        <div id="page-projects" class="page-section">
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 border-t border-ink-300/40 pt-8 mb-20">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-6">Hardware Deep Dive 01</h2>
+                    <h3 class="text-2xl font-bold text-ink-900 mb-4">PV Optimizer & Rapid Shutdown Safety</h3>
+                    <p class="text-lg leading-loose mb-6">
+                        In series-loop residential photovoltaic configurations, a single shaded panel dictates the current limit for the entire string. Implementing a PV optimizer allows individual panel MPPT (Maximum Power Point Tracking). However, the critical engineering constraint lies in <strong>overvoltage protection</strong> and <strong>rapid shutdown</strong> during grid failures or emergencies.
+                    </p>
+                    <p class="text-lg leading-loose mb-8">
+                        My recently patented topology (US 12,658,699) outlines an apparatus that utilizes a bypass circuit and advanced DSP control logic. In the event of an anomaly, the optimizer safely clamps the voltage and isolates the panel from the DC bus in milliseconds, satisfying strict NEC rapid shutdown requirements without compromising conversion efficiency during normal operation.
+                    </p>
+
+                    <!-- Code Block representing control logic -->
+                    <div class="rounded overflow-hidden shadow-sm border border-ink-300/20 mb-8">
+                        <div class="bg-[#1A1B1E] px-4 py-2 border-b border-gray-700/50 flex items-center font-sans text-xs text-gray-400">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 mr-2"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 mr-2"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 mr-4"></span>
+                            optimizer_isr.c
+                        </div>
+<pre><code class="language-c">// Simplified Interrupt Service Routine for overvoltage protection
+void __interrupt pv_voltage_monitoring_isr(void) {
+    float v_out = ADC_read(V_OUT_CHANNEL) * SCALING_FACTOR;
+    
+    if (v_out > OVP_THRESHOLD_VOLTS) {
+        // Trigger rapid shutdown sequence
+        PWM_disable_switching();
+        Relay_engage_bypass();
+        
+        SystemState.fault_flag = FAULT_OVP_TRIPPED;
+        Telemetry_send_emergency_flag();
+    } else {
+        // Continue MPPT Perturb and Observe
+        execute_mppt_algorithm(v_out);
+    }
+    ADC_clear_interrupt_flag();
+}</code></pre>
+                    </div>
+                </div>
+
+                <aside class="md:col-span-4 lg:col-span-4 lg:col-start-9 flex flex-col justify-center">
+                    <div class="pl-4 border-l border-ink-300/50 relative mt-8 md:mt-24">
+                        <span class="absolute -left-2 top-0 bg-accent text-white font-sans font-bold text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm">1</span>
+                        <p class="font-sans text-xs leading-relaxed text-ink-500">
+                            Embedded C control loop typical of TI C2000 microcontrollers. The control loop must execute well within the switching frequency period (e.g., &lt; 10&mu;s for a 100kHz switching stage) to prevent component failure during a sudden open-circuit event on the DC bus.
+                        </p>
+                    </div>
+                </aside>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 mb-12">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-6">Hardware Deep Dive 02</h2>
+                    <h3 class="text-2xl font-bold text-ink-900 mb-4">The ISOMBI Topology</h3>
+                    <p class="text-lg leading-loose mb-8">
+                        My master's research culminated in the <em>Isolated Manitoba Inverter (ISOMBI)</em>. Traditional grid-connected micro-inverters rely on bulky Low-Frequency Transformers (LFTs) for galvanic isolation. To increase power density, I designed a single-stage topology that integrates magnetic components and utilizes a High-Frequency Transformer (HFT).
+                    </p>
+                    
+                    <!-- Math Block -->
+                    <div class="my-8 py-8 px-4 bg-white border border-ink-300/30 shadow-sm rounded flex justify-center text-lg overflow-x-auto">
+                        <!-- KaTeX will automatically render this -->
+                        $$ P_{loss\_total} = P_{cond} + P_{sw} + P_{core} + P_{copper} $$
+                    </div>
+                    
+                    <p class="text-lg leading-loose mt-8">
+                        By meticulously modeling the switching losses (\(P_{sw}\)) and magnetic core losses (\(P_{core}\)) in PSCAD and MATLAB, the ISOMBI prototype proved capable of injecting power into the grid with near-unity Power Factor while drastically reducing the physical footprint of the inverter module.
+                    </p>
+                </div>
+
+                <aside class="md:col-span-4 lg:col-span-4 lg:col-start-9 flex flex-col justify-center">
+                    <div class="pl-4 border-l border-ink-300/50 relative mt-8 md:mt-24">
+                        <span class="absolute -left-2 top-0 bg-accent text-white font-sans font-bold text-[10px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm">2</span>
+                        <p class="font-sans text-xs leading-relaxed text-ink-500">
+                            Single-stage designs mathematically balance the trade-off between the increased complexity of the control scheme against the massive reduction in physical material (copper and iron) required for the system.
+                        </p>
+                    </div>
+                </aside>
+            </article>
+        </div>
+
+        <!-- PAGE 3: WRITING & PUBLICATIONS -->
+        <div id="page-writing" class="page-section">
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 border-t border-ink-300/40 pt-8 mb-16">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-8">Patents & Academic Research</h2>
+                    
+                    <ul class="space-y-8">
+                        <li class="group">
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+                                <h3 class="text-lg font-semibold text-ink-900"><a href="#" class="sleek-link">Photovoltaic power optimizer with overvoltage protection control and rapid shutdown device</a></h3>
+                                <span class="font-mono text-sm text-ink-400 mt-1 sm:mt-0 whitespace-nowrap sm:ml-4">2026</span>
+                            </div>
+                            <p class="font-sans text-sm text-ink-500 leading-relaxed mt-2"><strong class="text-ink-800">US Patent 12,658,699.</strong> Co-invented with R. Hesaraki, E. Montllo Casabayo, and C. Wauthy. Assigned to dcbel.</p>
+                        </li>
+                        
+                        <li class="group border-t border-ink-300/20 pt-8">
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+                                <h3 class="text-lg font-semibold text-ink-900"><a href="#" class="sleek-link">Design and Implementation of a Grid-Connected Solar Micro-Inverter with Integrated Magnetics</a></h3>
+                                <span class="font-mono text-sm text-ink-400 mt-1 sm:mt-0 whitespace-nowrap sm:ml-4">2021</span>
+                            </div>
+                            <p class="font-sans text-sm text-ink-500 leading-relaxed mt-2"><strong class="text-ink-800">Master's Thesis</strong>, University of Manitoba. Detailed the ISOMBI topology replacing standard LFTs with an integrated high-frequency magnetic approach.</p>
+                        </li>
+
+                        <li class="group border-t border-ink-300/20 pt-8">
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
+                                <h3 class="text-lg font-semibold text-ink-900"><a href="#" class="sleek-link">An Isolated Single-Stage Single-Phase Micro-Inverter Topology with Integrated Magnetic Components</a></h3>
+                                <span class="font-mono text-sm text-ink-400 mt-1 sm:mt-0 whitespace-nowrap sm:ml-4">2019</span>
+                            </div>
+                            <p class="font-sans text-sm text-ink-500 leading-relaxed mt-2"><strong class="text-ink-800">IEEE Energy Conversion Congress and Exposition (ECCE).</strong> Early stage validation and theoretical proof-of-concept for the ISOMBI architecture.</p>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Essays / Future Blog Section -->
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 border-t border-ink-300/40 pt-16">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent">Essays & Notes</h2>
+                        <span class="font-mono text-xs text-ink-400 px-2 py-1 bg-ink-300/20 rounded">Coming Soon</span>
+                    </div>
+                    
+                    <p class="text-lg leading-loose text-ink-500 italic">
+                        I am currently writing long-form essays on topics bridging DSP control theory, PCB layout techniques for high-frequency switching, and the future of vehicle-to-grid architectures. Check back soon.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <!-- PAGE 4: CV -->
+        <div id="page-cv" class="page-section">
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-x-12 gap-y-8 border-t border-ink-300/40 pt-8">
+                
+                <!-- Experience -->
+                <div class="md:col-span-8 lg:col-span-7 mb-12">
+                    <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-8">Experience</h2>
+                    
+                    <div class="space-y-10 border-l border-ink-300/40 ml-2 pl-6">
+                        <div class="relative">
+                            <span class="absolute -left-[29px] top-1.5 w-3 h-3 bg-accent rounded-full shadow-[0_0_0_4px_#FCFCFB]"></span>
+                            <div class="font-sans mb-1 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                                <h3 class="font-bold text-ink-900 text-lg">Power Electronics Developer</h3>
+                                <span class="font-mono text-xs text-ink-500 mt-1 sm:mt-0">Present</span>
+                            </div>
+                            <p class="font-sans text-sm font-medium text-ink-500 mb-3">dcbel</p>
+                            <p class="text-base leading-relaxed text-ink-800">
+                                Designing and validating high-power, high-frequency bidirectional power converters for EV charging, V2H/V2G systems, and smart home energy management. Focus on topology development, thermal management, and rapid shutdown safety controls.
+                            </p>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[29px] top-1.5 w-3 h-3 bg-ink-300 rounded-full shadow-[0_0_0_4px_#FCFCFB]"></span>
+                            <div class="font-sans mb-1 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                                <h3 class="font-bold text-ink-900 text-lg">Graduate Research Assistant</h3>
+                                <span class="font-mono text-xs text-ink-500 mt-1 sm:mt-0">2018 &mdash; 2021</span>
+                            </div>
+                            <p class="font-sans text-sm font-medium text-ink-500 mb-3">RIGA Lab, University of Manitoba</p>
+                            <p class="text-base leading-relaxed text-ink-800">
+                                Developed the Isolated Manitoba Inverter (ISOMBI) under Dr. Carl Ho. Designed hardware prototypes, wrote DSP control algorithms, and performed extensive PSCAD/MATLAB simulations for grid-tied systems.
+                            </p>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[29px] top-1.5 w-3 h-3 bg-ink-300 rounded-full shadow-[0_0_0_4px_#FCFCFB]"></span>
+                            <div class="font-sans mb-1 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                                <h3 class="font-bold text-ink-900 text-lg">Avionics Engineer</h3>
+                                <span class="font-mono text-xs text-ink-500 mt-1 sm:mt-0">2018 &mdash; 2019</span>
+                            </div>
+                            <p class="font-sans text-sm font-medium text-ink-500 mb-3">Canadian CubeSat Project</p>
+                            <p class="text-base leading-relaxed text-ink-800">
+                                Designed and tested satellite avionics systems. Presented technical briefings to the Canadian Space Agency, ensuring systems met strict thermal and radiation-hardened constraints.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack & Education -->
+                <aside class="md:col-span-4 lg:col-span-4 lg:col-start-9 flex flex-col space-y-12">
+                    <div>
+                        <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-6">Technical Stack</h2>
+                        <ul class="font-sans text-sm text-ink-800 space-y-3">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> PCB Design (Altium Designer)</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> Embedded C / C++</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> TI C2000 DSPs</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> MATLAB / Simulink</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> PSCAD / EMTDC</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-ink-300 rounded-full mr-3"></span> Grid Standards Compliance</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="font-sans text-xs font-bold tracking-widest uppercase text-accent mb-6">Education</h2>
+                        <div class="mb-4">
+                            <h3 class="font-sans font-bold text-ink-900">M.Sc., Electrical Engineering</h3>
+                            <p class="font-sans text-sm text-ink-500">University of Manitoba</p>
+                        </div>
+                        <div>
+                            <h3 class="font-sans font-bold text-ink-900">B.Eng., Electrical Engineering</h3>
+                            <p class="font-sans text-sm text-ink-500">University of Ilorin</p>
+                        </div>
+                    </div>
+                </aside>
+            </article>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto px-6 py-10 border-t border-ink-300/20 font-sans flex flex-col md:flex-row justify-between items-center text-xs text-ink-400 mt-auto">
+        <p>&copy; 2026 Hafis Kolapo Umar-Lawal. Typeset in Lora & Inter.</p>
+        <p class="mt-2 md:mt-0">Single-Page Application Architecture.</p>
+    </footer>
+
+    <!-- Client-Side Router Logic -->
+    <script>
+        function handleRouting() {
+            // Get the hash from the URL, default to 'about' if empty
+            let hash = window.location.hash.substring(1) || 'about';
+            
+            // Validate hash to ensure it matches a section, otherwise default to about
+            const validSections = ['about', 'projects', 'writing', 'cv'];
+            if (!validSections.includes(hash)) {
+                hash = 'about';
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show target page
+            const targetSection = document.getElementById('page-' + hash);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Update navigation active states
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('data-target') === hash) {
+                    link.classList.add('active', 'font-bold');
+                    link.classList.remove('font-semibold');
+                } else {
+                    link.classList.remove('active', 'font-bold');
+                    link.classList.add('font-semibold');
+                }
+            });
+
+            // Scroll to top on page change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Listen for hash changes (clicking links or back/forward buttons)
+        window.addEventListener('hashchange', handleRouting);
+
+        // Run on initial load
+        window.addEventListener('DOMContentLoaded', handleRouting);
+    </script>
+</body>
+</html>

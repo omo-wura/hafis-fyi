@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafis Umar-Lawal | Power Electronics & Hardware Engineer</title>
+    <meta name="description" content="Power Electronics & Hardware Engineer specializing in the design, failure forensics, and operational lifecycle governance of safety-critical, high-den...">
+
+    <!-- CSS Stylesheet (Injected at build time) -->
+    <style>
+        /* Custom Vanilla CSS Design System for Hafis Umar-Lawal */
+
+/* Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+/* CSS Reset & Variables */
+:root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Lora', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Light Theme (Default) */
+    --hue: 224;
+    --bg-gradient-1: #fafaf9;
+    --bg-gradient-2: #f4f4f5;
+    --bg: #fafaf9;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.9);
+    --text-primary: #18181b;
+    --text-secondary: #4b5563;
+    --text-muted: #8b5cf6; /* Accent HSL can override */
+    
+    --accent: hsl(var(--hue), 85%, 50%);
+    --accent-light: hsl(var(--hue), 85%, 95%);
+    --accent-glow: rgba(59, 130, 246, 0.15);
+    --border: rgba(24, 24, 27, 0.08);
+    --border-hover: rgba(24, 24, 27, 0.15);
+    
+    --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+
+    --transition-speed: 0.35s;
+    --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --bg-gradient-1: #09090b;
+    --bg-gradient-2: #18181b;
+    --bg: #09090b;
+    --bg-card: rgba(24, 24, 27, 0.6);
+    --bg-card-hover: rgba(39, 39, 42, 0.8);
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+
+    --accent: hsl(var(--hue), 90%, 62%);
+    --accent-light: hsl(var(--hue), 30%, 15%);
+    --accent-glow: rgba(96, 165, 250, 0.15);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+
+    --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    transition: background var(--transition-speed) var(--transition-curve),
+                color var(--transition-speed) var(--transition-curve);
+}
+
+/* Ambient Backdrop Glows */
+body::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(80px);
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(80px);
+}
+
+/* Selection */
+::selection {
+    background-color: var(--accent-light);
+    color: var(--accent);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Custom Sleek Link */
+.sleek-link {
+    font-weight: 500;
+    background-image: linear-gradient(to right, var(--text-secondary), var(--text-secondary));
+    background-position: bottom 2px left 0;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    transition: background-size 0.25s var(--transition-curve), 
+                color 0.25s var(--transition-curve), 
+                background-image 0.25s var(--transition-curve);
+}
+
+.sleek-link:hover {
+    background-size: 100% 2px;
+    color: var(--accent);
+    background-image: linear-gradient(to right, var(--accent), var(--accent));
+}
+
+/* Header & Navigation */
+.site-header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .site-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4rem 2rem 2rem;
+        border-bottom: none;
+    }
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.logo p {
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    position: relative;
+    padding: 0.25rem 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s var(--transition-curve);
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-link.active {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s var(--transition-curve);
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+    transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Content area */
+.main-content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 6rem;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding: 3rem 2rem 8rem;
+    }
+}
+
+/* SPA Sections */
+.page-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s var(--transition-curve), transform 0.4s var(--transition-curve);
+}
+
+.page-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Grid Layouts */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 992px) {
+    .grid-layout {
+        grid-template-columns: 7fr 4fr;
+        gap: 4rem;
+    }
+}
+
+/* Sections Styling */
+.section-title {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background-color: var(--border);
+}
+
+/* Bio / Overview */
+.bio-lead {
+    font-size: 1.25rem;
+    line-height: 1.85;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.bio-body p {
+    margin-bottom: 1.5rem;
+}
+
+/* Pillars Cards */
+.pillars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pillar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--transition-curve);
+}
+
+.pillar-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md), 0 0 20px var(--accent-glow);
+}
+
+.pillar-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pillar-card h3::before {
+    content: '▪';
+    color: var(--accent);
+}
+
+.pillar-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* Projects page & Project posts */
+.project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s var(--transition-curve);
+    backdrop-filter: blur(8px);
+}
+
+.project-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.project-header {
+    margin-bottom: 1.5rem;
+}
+
+.project-meta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.project-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.project-meta span::after {
+    content: '•';
+    margin-left: 1rem;
+}
+
+.project-meta span:last-child::after {
+    display: none;
+}
+
+.project-card h2 {
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+}
+
+/* Math block */
+.math-block {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--shadow-sm) inset;
+}
+
+/* Markdown generated styles */
+.markdown-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.markdown-body h2 {
+    font-size: 1.35rem;
+    margin: 2rem 0 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.markdown-body h3 {
+    font-size: 1.15rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.markdown-body ul, .markdown-body ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    list-style-type: square;
+    color: var(--text-secondary);
+}
+
+.markdown-body li {
+    margin-bottom: 0.5rem;
+}
+
+.markdown-body strong {
+    color: var(--text-primary);
+}
+
+.markdown-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background-color: var(--border);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: var(--accent);
+}
+
+.markdown-body pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Code block styles */
+.code-container {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.code-header {
+    background: #1e1e24;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: #a1a1aa;
+}
+
+.code-header .dots {
+    display: flex;
+    gap: 0.35rem;
+    margin-right: 0.75rem;
+}
+
+.code-header .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.code-header .dot.red { background: #ef4444; }
+.code-header .dot.yellow { background: #f59e0b; }
+.code-header .dot.green { background: #10b981; }
+
+.code-header .title {
+    font-weight: 500;
+}
+
+pre[class*="language-"] {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* Writing Page */
+.essays-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.essay-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+}
+
+.essay-item:last-child {
+    border-bottom: none;
+}
+
+.essay-item h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+}
+
+.essay-meta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.essay-excerpt {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* CV Page Timeline */
+.cv-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.cv-section-header {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.timeline {
+    border-left: 2px solid var(--border);
+    padding-left: 1.5rem;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: calc(-1.5rem - 6px - 1px);
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bg);
+    border: 2px solid var(--border);
+    transition: all 0.3s var(--transition-curve);
+}
+
+.timeline-item:hover .timeline-dot {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.timeline-item.active .timeline-dot {
+    border-color: var(--accent);
+    background-color: var(--accent);
+}
+
+.timeline-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 600px) {
+    .timeline-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+}
+
+.timeline-role {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+@media (min-width: 600px) {
+    .timeline-period {
+        margin-top: 0;
+    }
+}
+
+.timeline-company {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.timeline-body {
+    font-size: 0.95rem;
+}
+
+.timeline-body ul {
+    margin-left: 1.25rem;
+    list-style-type: disc;
+    color: var(--text-secondary);
+}
+
+.timeline-body li {
+    margin-bottom: 0.5rem;
+}
+
+/* Sidebar Info (Education & Skills & Certifications) */
+.sidebar-section {
+    margin-bottom: 2.5rem;
+}
+
+.sidebar-section h3 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-section h3::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background-color: var(--border);
+}
+
+.sidebar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebar-item-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.sidebar-item-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+    margin-bottom: 0;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+/* Patents section on About page */
+.patent-notice-box {
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-card);
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--shadow-sm);
+    margin-top: 2rem;
+}
+
+.patent-notice-box h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.patent-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.patent-number {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.patent-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Footer styling */
+.site-footer {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto auto 0;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+    .site-footer {
+        flex-direction: row;
+        padding: 3rem 2rem;
+    }
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    transition: all 0.25s var(--transition-curve);
+}
+
+.social-icon-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+.social-icon-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+    </style>
+
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <!-- PrismJS for sleek syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    
+    <!-- Inline script to set theme early to prevent flickering -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 
+                               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Minimal Header -->
+    <header class="site-header">
+        <div class="logo">
+            <h1><a href="#about">Hafis Umar-Lawal</a></h1>
+            <p>Power Electronics & Hardware Engineer</p>
+        </div>
+        <div class="nav-container">
+            <nav class="main-nav" id="main-nav">
+                <a href="#about" class="nav-link" data-target="about">About</a>
+                <a href="#projects" class="nav-link" data-target="projects">Projects & Research</a>
+                <a href="#writing" class="nav-link" data-target="writing">Writing</a>
+                <a href="#cv" class="nav-link" data-target="cv">CV</a>
+            </nav>
+            
+            <!-- Dark Mode Toggle Button -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+                <!-- Sun Icon -->
+                <svg class="sun-icon" viewBox="0 0 24 24" style="display: none;">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                </svg>
+                <!-- Moon Icon -->
+                <svg class="moon-icon" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+
+        <!-- SECTION 1: ABOUT -->
+        <section id="page-about" class="page-section active">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Overview</h2>
+                    <div class="bio-lead">
+                        <p class="bio-lead">Power Electronics & Hardware Engineer specializing in the design, failure forensics, and operational lifecycle governance of safety-critical, high-density power conversion systems. Experienced in taking products from paper specifications through simulation, multi-layer PCB layout, firmware co-design, safety certifications, and manufacturing handover.</p>
+                    </div>
+                    <div class="bio-body">
+                        <p>Certified TÜV SÜD Functional Safety Engineer with deep expertise in residential microgrids, battery cyclers, and space avionics.</p>
+    <p>Before my work in industry, I conducted research at the University of Manitoba's Renewable Energy Interface and Grid Automation Laboratory (RIGA Lab), focusing on single-stage solar micro-inverters, and served as Lead Avionics Developer for the IRIS CubeSat satellite mission.</p>
+                    </div>
+                    <div class="acknowledgements-section" style="margin-top: 3rem;">
+                        <h2 class="section-title">Acknowledgements</h2>
+                        <div class="markdown-body" style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);">
+                            <h1>Mentorship &amp; Collaborations</h1>
+<p>My journey in power electronics and space systems engineering has been shaped by the guidance, support, and collaboration of exceptional mentors, advisors, and colleagues. I would like to acknowledge:</p>
+<ul>
+<li><p><strong>Dr. Carl Ho &amp; The RIGA Lab Team</strong> (University of Manitoba)<br>For the invaluable academic mentorship, theoretical training, and hands-on laboratory guidance in grid-tied solar micro-inverter topologies and integrated magnetics research.</p>
+</li>
+<li><p><strong>The IRIS CubeSat Avionics Team &amp; STAR Lab</strong><br>For the incredible team camaraderie and peer support during the design, layout, and rigorous Canadian Space Agency (CSA) reviews of our nanosatellite flight systems.</p>
+</li>
+<li><p><strong>The Engineering Team at GBatteries</strong><br>For the collaboration, challenging problems, and shared learning during the development and stability analysis of our high-speed, high-density GaN battery cycler power stages.</p>
+</li>
+<li><p><strong>The Power &amp; Hardware Teams at dcbel</strong><br>For the outstanding partnership in designing bidirectional home microgrid systems, co-inventing safety/optimizer controls, and establishing unified, multi-engineer CAD library standards.</p>
+</li>
+</ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">Focus Pillars</h2>
+                    <div class="pillars-container">
+                        
+        <div class="pillar-card">
+            <h3>Power Conversion Stage Design</h3>
+            <p>Design of bidirectional high-density converters (up to 14kW, including GaN stages at 500kHz), active precharge loops, relay coil economization, and integrated magnetic cores.</p>
+        </div>
+        <div class="pillar-card">
+            <h3>Failure Analysis & Diagnostics (Forensics)</h3>
+            <p>Applying first-principles physical analysis to debug transient anomalies, IGBT desaturation dynamics, closed-loop instability, and EMI/EMC issues (UL 1741, UL 60730, FCC Part 15).</p>
+        </div>
+        <div class="pillar-card">
+            <h3>Operational Governance & CAD Management</h3>
+            <p>Managing CAD component library databases (Altium 365 DBLib), component template parameters, and gatekeeping release pipelines via ECO workflows in PLM software (Arena).</p>
+        </div>
+                    </div>
+                    
+                    
+        <div class="patent-notice-box">
+            <h4>Featured Patent</h4>
+            <div class="patent-title">Photovoltaic power optimizer with overvoltage protection control and rapid shutdown device</div>
+            <div class="patent-number">US Patent 12,658,699</div>
+            <p class="patent-text">Issued June 2026. Co-invented with R. Hesaraki, E. Montllo Casabayo, and C. Wauthy. Assigned to dcbel.</p>
+            <a href="#projects" class="sleek-link" style="font-size: 0.8rem; font-family: var(--font-sans); font-weight: 700; margin-top: 0.75rem; display: inline-block;">Read the design details &rarr;</a>
+        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PROJECTS & RESEARCH -->
+        <section id="page-projects" class="page-section">
+            <h2 class="section-title" style="margin-bottom: 2.5rem;">Case Studies & Hardware</h2>
+            <div class="projects-list">
+                
+        <article class="project-card">
+            <div class="project-header">
+                <h2>Residential Microgrid & ESS Converters (dcbel)</h2>
+                <div class="project-meta">
+                    <span><strong>Role:</strong> Power Electronics Design Engineer</span>
+                    <span><strong>Org/Company:</strong> dcbel inc.</span>
+                    <span><strong>Scope:</strong> 14kW ESS Bi-directional DC/DC Converter & 400W–600W Solar DC Optimizer</span>
+                </div>
+            </div>
+            <div class="markdown-body">
+                <hr>
+<h2>1. Technical Objectives &amp; Constraints</h2>
+<ul>
+<li><strong>ESS Interface:</strong> Develop a bi-directional, non-isolated power stage capable of transferring 14kW nominal (with a 10-second peak power boost up to 20kW) between the high-voltage battery pack and the internal DC bus.</li>
+<li><strong>Solar Integration:</strong> Engineer a module-level DC optimizer (400W–600W class) to maximize solar energy harvesting and comply with safety rapid shutdown standards.</li>
+<li><strong>Safety &amp; Protections:</strong> Integrate active precharge paths, ground fault detection, and fast-acting fuses to handle high short-circuit currents.</li>
+</ul>
+<hr>
+<h2>2. Electrical &amp; Mechanical Architecture</h2>
+<pre><code>                 +-----------------------------------+
+                 |        14kW ESS DC/DC Stage       |
+  [ESS Pack] ---&gt;| [Fuses] -&gt; [Relays] -&gt; [Precharge]|---&gt; [Internal DC Bus]
+                 |         [Half-Bridge Converter]   |
+                 +-----------------------------------+
+                                   ^
+                                   | (CAN Bus)
+                                   v
+                 +-----------------------------------+
+                 |        Solar DC Optimizer         |
+  [PV Modules] -&gt;| [MPPT Control] -&gt; [PLC Telemetry] |---&gt; [Combiner Box]
+                 |       [Rapid Shutdown Switch]     |
+                 +-----------------------------------+
+</code></pre>
+<h3>14kW ESS Bidirectional Converter</h3>
+<ul>
+<li><strong>Topology:</strong> Non-isolated bidirectional half-bridge power stage operating with high power density.</li>
+<li><strong>Inrush Control:</strong> Designed a passive precharge network featuring a high-power current-limiting resistor and a bypass contactor to protect main relay contacts from welding during the bus charge sequence.</li>
+<li><strong>Contact Control:</strong> Implemented economized coil controllers for the main contactors to minimize steady-state thermal dissipation and energy consumption during continuous operation.</li>
+<li><strong>Transient Capability:</strong> Sized and validated the power stage to support Locked Rotor Amperage (LRA) loads and 20kW transient power spikes.</li>
+</ul>
+<h3>Module-Level Solar DC Optimizer</h3>
+<ul>
+<li><strong>Features:</strong> Implemented Maximum Power Point Tracking (MPPT) for cascaded series-connected modules.</li>
+<li><strong>Telemetry:</strong> Programmed Power Line Communication (PLC) nodes to transmit real-time telemetry over the power lines to the central combiner box.</li>
+<li><strong>Safety:</strong> Integrated a rapid shutdown circuit that drops module-level voltages to safe levels within seconds of utility loss. Co-authored <strong>US Patent 12,658,699</strong> defining the overvoltage protection control and rapid shutdown apparatus.</li>
+</ul>
+<hr>
+<h2>3. Key Engineering Challenges &amp; Solutions</h2>
+<h3>A. High-Density Thermal Management</h3>
+<ul>
+<li><strong>Challenge:</strong> Dissipating heat from the 14kW converter switches in a compact enclosure without resorting to noisy, low-reliability fans.</li>
+<li><strong>Solution:</strong> Utilized top-side cooled discrete power devices, mounting them directly to an internal copper heatspreader. The heatspreader was thermally coupled to a giant aluminum chassis bedrock using high-performance Thermal Interface Materials (TIMs). This decoupled the thermal pathway from the PCB, keeping junction temperatures well within safety margins.</li>
+</ul>
+<h3>B. EV Charger Cable Check Forensics</h3>
+<ul>
+<li><strong>Challenge:</strong> Occasional, false desaturation (DESAT) faults were triggered on the main switching inline IGBTs during the EV charger&#39;s cable check sequence, halting the startup sequence.</li>
+<li><strong>Solution:</strong> Conducted first-principles forensic analysis on the IGBT gates. Traced the issue to the physical sensitivity of the IGBTs under very low-current bleeder loads (where the vehicle contactors were still open). Solved the issue by synthesizing a custom hardware noise filter and adjusting the gate driver blanking time, restoring system stability.</li>
+</ul>
+
+            </div>
+        </article>
+        <article class="project-card">
+            <div class="project-header">
+                <h2>IRIS 3U CubeSat Avionics Systems</h2>
+                <div class="project-meta">
+                    <span><strong>Role:</strong> Lead Avionics Developer</span>
+                    <span><strong>Org/Company:</strong> </span>
+                    <span><strong>Scope:</strong> </span>
+                </div>
+            </div>
+            <div class="markdown-body">
+                <hr>
+<h2>1. Technical Objectives &amp; Constraints</h2>
+<ul>
+<li><strong>Platform:</strong> Design the electrical power system, telemetry, and payload control architecture for the IRIS 3U research nanosatellite.</li>
+<li><strong>Space Environment:</strong> Mitigate Single Event Upsets (SEUs) caused by orbital radiation while staying within strict weight, volume, and power budgets.</li>
+<li><strong>Governance:</strong> Escrow and present all electrical hardware designs through formal Canadian Space Agency (CSA) reviews.</li>
+</ul>
+<hr>
+<h2>2. Distributed Power &amp; Bus Architecture</h2>
+<pre><code>                       +----------------------------------+
+                       |           EPS Board              |
+  [Solar Panels] -----&gt;|  - MSP430 Regulator (DET / SSR)  |
+                       |  - LiFePO4 Battery Protection    |
+                       +----------------------------------+
+                                        |
+                 +----------------------+----------------------+
+                 | (Raw Battery Voltage Power Bus)             |
+                 v                                             v
+  +------------------------------+             +------------------------------+
+  |          OBC Board           |             |      Payload Imager Board    |
+  | - SmartFusion2 SoC           |             | - STM32F4 MCU                |
+  | - Local Buck Regulator       |             | - Local LDO &amp; Filter Caps    |
+  +------------------------------+             +------------------------------+
+                 ^                                             ^
+                 +==================[ CAN Bus ]================+
+</code></pre>
+<h3>Direct Energy Transfer (DET) Power Bus</h3>
+<ul>
+<li><strong>Concept:</strong> Instead of placing a central high-frequency switching regulator on the EPS board (which would introduce switching noise and act as a single point of failure), the system utilized a Direct Energy Transfer (DET) architecture.</li>
+<li><strong>Battery Bus:</strong> The EPS distributed raw battery voltage directly to all satellite subsystems. This was feasible because the LiFePO4 (Lithium Iron Phosphate) chemistry provides a highly stable voltage discharge curve (typically 12.8V–13.6V for a 4S configuration).</li>
+<li><strong>Power Control:</strong> The EPS board incorporated low-power, high-reliability switches managed by a TI MSP430 microcontroller. The MSP430 controlled power distribution to each subsystem and governed solar charging using Sequential Switch Regulation (SSR).</li>
+</ul>
+<h3>Local Subsystem Power Regulation</h3>
+<ul>
+<li><strong>Decentralized Regulators:</strong> Each subsystem regulated its own power locally (e.g., the payload imager utilized local regulators and extensive bulk decoupling capacitance). This kept switching noise contained near the load.</li>
+<li><strong>Cabling &amp; Communication:</strong> Subsystems were linked via a robust, differential CAN bus network utilizing shielded twisted-pair cabling. This eliminated the need for fragile multi-board stack connectors and provided high noise immunity.</li>
+</ul>
+<hr>
+<h2>3. Selected Controller Architecture</h2>
+<ul>
+<li><strong>Main OBC (Command &amp; Data Handling):</strong> Selected the <strong>Microsemi SmartFusion2 SoC</strong> (incorporating a hard ARM Cortex-M3 processor and flash-based FPGA fabric) to provide excellent radiation tolerance against single-event upsets.</li>
+<li><strong>Payload Imager:</strong> Selected the <strong>STM32F4 microcontroller</strong>, leveraging its hardware Digital Camera Interface (DCMI) to interface directly with scientific imaging sensors.</li>
+<li><strong>EPS Controls:</strong> Selected the ultra-low-power <strong>TI MSP430 microcontroller</strong> to manage the power switches and monitor solar charging currents.</li>
+</ul>
+<hr>
+<h2>4. Hardware Verification &amp; Launch Approvals</h2>
+<ul>
+<li><strong>Bring-up:</strong> Completed multi-layer PCB layout designs in Altium Designer, incorporating thermal copper paths to dissipate heat in the vacuum of space. Conducted bring-up testing of all boards, validating power rail isolation and CAN bus differential signals.</li>
+<li><strong>Flight Clearance:</strong> Escorted the electrical systems design through formal Preliminary Design Reviews (PDR) and Critical Design Reviews (CDR) hosted by panels of engineers from the <strong>Canadian Space Agency (CSA)</strong> and <strong>Nanoracks</strong>, securing full spaceflight integration approvals.</li>
+</ul>
+<hr>
+<h2>5. Engineering Retrospective &amp; Hindsight</h2>
+<ul>
+<li><strong>Ideal Diodes vs. Hot-Swap Inrush Control:</strong><br>In the initial EPS design, we opted for ideal diodes to handle power path selection and reverse current protection. While this minimized forward voltage drops and heat dissipation, ideal diodes do not provide active current limit control during hot-plugging events. In hindsight, implementing a dedicated hot-swap controller with active inrush current control (slew-rate control on the MOSFET gate) would have been a superior design choice. It would have provided robust short-circuit protection and prevented transient voltage dips on the shared DET power bus during card insertion or subsystem power-up.</li>
+</ul>
+
+            </div>
+        </article>
+        <article class="project-card">
+            <div class="project-header">
+                <h2>400W Solar Micro-Inverter with Integrated Magnetics</h2>
+                <div class="project-meta">
+                    <span><strong>Role:</strong> </span>
+                    <span><strong>Org/Company:</strong> </span>
+                    <span><strong>Scope:</strong> </span>
+                </div>
+            </div>
+            <div class="markdown-body">
+                <hr>
+<h2>1. Technical Concept &amp; Objectives</h2>
+<p>To lower the cost and component count of grid-tied solar systems, this project designed and built a single-stage, isolated solar micro-inverter. Instead of traditional cascaded stages (DC/DC boost followed by a DC/AC inverter), this design utilized a novel flyback-family topology that integrates the isolation transformer and buck-boost inductors onto a single magnetic core (integrated magnetics).</p>
+<hr>
+<h2>2. System Architecture &amp; Controls</h2>
+<pre><code>  [PV Input] ---&gt; [Integrated Magnetic Stage] ---&gt; [Unfolding Bridge] ---&gt; [Utility Grid]
+       |                      ^                           ^
+   (Vpv, Ipv)                 | (100kHz PWM)              | (Line Freq)
+       |                      |                           |
+       v                      +---------------------------+
+  [F28379D MCU] ---&gt; [Dual-Loop: Grid Current Inner &amp; MPPT Outer Loops]
+</code></pre>
+<h3>Integrated Magnetic Core</h3>
+<ul>
+<li><strong>Core Selection:</strong> Built the magnetic assembly on a standard manganese-zinc ferrite E-core geometry.</li>
+<li><strong>Winding Integration:</strong> Combined the high-frequency isolation transformer and the buck-boost inductor windings on the same core structure to minimize core count and footprint.</li>
+</ul>
+<h3>Real-Time Control Loops</h3>
+<ul>
+<li><strong>Inner Loop:</strong> Implemented average current mode control to regulate grid current injection, shaping it to be sinusoidal and in-phase with the grid voltage.</li>
+<li><strong>Outer Loop:</strong> Designed a Maximum Power Point Tracking (MPPT) loop utilizing grid parameters ($V_g$, $I_g$) to estimate power throughput and adjust the reference relative to the PV panel voltage ($V_{pv}$).</li>
+<li><strong>Execution:</strong> Programmed the real-time control system in bare-metal C on a TI Delfino F28379D MCU, synchronizing ADC conversions with the 100kHz PWM switching frequency.</li>
+</ul>
+<hr>
+<h2>3. Engineering Challenges &amp; Critical Retrospective</h2>
+<h3>Prototype Characterization</h3>
+<ul>
+<li><strong>Performance outcome:</strong> The completed prototype achieved grid-tied injection but suffered from a low peak efficiency of approximately 65%.</li>
+<li><strong>Root-Cause Analysis:</strong><ul>
+<li><strong>Hand-Wound Core Leakage:</strong> Fabricating the integrated magnetic structure by hand without advanced industrial winding equipment led to poor coupling coefficients and high leakage inductance.</li>
+<li><strong>Parasitic Ringing:</strong> The high leakage inductance stored energy that was dissipated in snubber networks and clamp circuits rather than being transferred, causing high thermal losses at 100kHz.</li>
+<li><strong>Layout Parasitics:</strong> High-frequency loop layouts had suboptimal return paths, compounding parasitic inductances and device switching losses.</li>
+</ul>
+</li>
+</ul>
+<h3>Professional Growth</h3>
+<p>This thesis prototype served as a masterclass in high-frequency power electronics layout. The lessons learned in diagnosing this prototype&#39;s leakage losses directly informed the layout practices used in subsequent commercial designs:</p>
+<ul>
+<li><strong>GaN Board Layouts:</strong> Enabled the design of 500kHz GaN switching loops with sub-nanohenry loop inductances at GBatteries.</li>
+<li><strong>Insulation Coordination:</strong> Guided the clearances and creepages implemented in high-voltage 14kW stages at dcbel.</li>
+</ul>
+
+            </div>
+        </article>
+            </div>
+        </section>
+
+        <!-- SECTION 3: WRITING -->
+        <section id="page-writing" class="page-section">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Essays & Notes</h2>
+                    <div class="essays-list">
+                        
+        <div id="series-electronics-from-the-bottom-up--a-first-principles-guide" class="series-container" style="margin-bottom: 3.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+                <span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span>
+                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Electronics from the Bottom Up: A First-Principles Guide</h3>
+            </div>
+            
+            <!-- Featured Latest Post -->
+            <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
+                <div style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Latest Entry &bull; Part 3</div>
+                <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">
+                    <a href="#writing/electronics-bottom-up-03" class="sleek-link">The Stretchy Room</a>
+                </h4>
+                <div class="essay-meta" style="margin-bottom: 0.75rem; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; gap: 1rem;">
+                    <span>Published: July 6, 2026</span>
+                    <span>Category: Concepts</span>
+                </div>
+                <p class="essay-excerpt" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Demystifying the capacitor as a physical tension chamber where energy is stored in the displacement of dielectric charge.
+                </p>
+                <a href="#writing/electronics-bottom-up-03" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Read Full Article &rarr;</a>
+                
+                <!-- Explore Series Accordion Toggle -->
+                
+                    <div style="margin-top: 1.25rem;">
+                        <a href="javascript:void(0)" id="btn-explore-expand-series-electronics-from-the-bottom-up--a-first-principles-guide" onclick="toggleSeriesExpansion('expand-series-electronics-from-the-bottom-up--a-first-principles-guide')" class="explore-series-btn" style="font-family: var(--font-sans); font-size: 0.825rem; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
+                            Explore Series (2 More Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
+                        </a>
+                        
+                        <div id="expand-series-electronics-from-the-bottom-up--a-first-principles-guide" style="display: none; margin-top: 1rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
+                            <div style="font-size: 0.95rem;">
+                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 1 &bull; June 22, 2026</div>
+                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
+                                    <a href="#writing/electronics-bottom-up-01" class="sleek-link">Rebuilding the Foundations</a>
+                                </h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Reconstructing our understanding of electrical engineering by discarding mathematical abstractions and viewing circuits through a charge-centric, physics-first lens.</p>
+                            </div>
+                            <div style="font-size: 0.95rem;">
+                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 2 &bull; June 29, 2026</div>
+                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
+                                    <a href="#writing/electronics-bottom-up-02" class="sleek-link">The Tragedy of the Source</a>
+                                </h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Exploring voltage as a spatial pressure and resistors as entropic vibrating obstacle courses that steal energy as heat.</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div id="series-forensics-case-studies" class="series-container" style="margin-bottom: 3.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+                <span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span>
+                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Forensics Case Studies</h3>
+            </div>
+            
+            <!-- Featured Latest Post -->
+            <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
+                <div style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Latest Entry &bull; Part 2</div>
+                <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">
+                    <a href="#writing/forensics-case-study-02" class="sleek-link">LTspice Forensics: Tuning Closed-Loop Stability for High-Speed GaN Power Stages</a>
+                </h4>
+                <div class="essay-meta" style="margin-bottom: 0.75rem; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; gap: 1rem;">
+                    <span>Published: July 12, 2026</span>
+                    <span>Category: Engineering Forensics</span>
+                </div>
+                <p class="essay-excerpt" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                    Investigating loop stability margin failures under transient load step testing, resolved via high-frequency poles in LTspice and network analysis.
+                </p>
+                <a href="#writing/forensics-case-study-02" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Read Full Article &rarr;</a>
+                
+                <!-- Explore Series Accordion Toggle -->
+                
+                    <div style="margin-top: 1.25rem;">
+                        <a href="javascript:void(0)" id="btn-explore-expand-series-forensics-case-studies" onclick="toggleSeriesExpansion('expand-series-forensics-case-studies')" class="explore-series-btn" style="font-family: var(--font-sans); font-size: 0.825rem; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
+                            Explore Series (1 More Article) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
+                        </a>
+                        
+                        <div id="expand-series-forensics-case-studies" style="display: none; margin-top: 1rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
+                            <div style="font-size: 0.95rem;">
+                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 1 &bull; June 15, 2026</div>
+                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
+                                    <a href="#writing/igbt-desat-forensics" class="sleek-link">IGBT Desaturation Forensics: Debugging False Trips under Light Bleeder Currents</a>
+                                </h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Troubleshooting sporadic desaturation (DESAT) faults on main switching IGBTs during high-voltage EV charger cable checks under ultra-light bleeder currents using first-principles gate-charge diagnostics.</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">Publications & Patents</h2>
+                    <div class="sidebar-section">
+                        <ul class="sidebar-list">
+                            
+            <li class="sidebar-item" style="margin-bottom: 1.5rem;">
+                <div class="sidebar-item-title">
+                    <span class="patent-number">US Patent 12,658,699</span>
+                </div>
+                <p class="sidebar-item-desc">
+                    <strong>Photovoltaic power optimizer with overvoltage protection control and rapid shutdown device</strong><br>
+                    Co-invented with R. Hesaraki, E. Montllo Casabayo, and C. Wauthy. Assigned to dcbel. (Issued June 2026)
+                </p>
+            </li>
+            <li class="sidebar-item" style="border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem; margin-bottom: 1.5rem;">
+                <div class="sidebar-item-title">Design and implementation of a grid-connected solar micro-inverter using a single-stage galvanically isolated topology with integrated magnetics</div>
+                <p class="sidebar-item-desc">
+                    <strong>Master's Thesis</strong><br>
+                    University of Manitoba, May 2021
+                </p>
+            </li>
+            <li class="sidebar-item" style="border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem; margin-bottom: 1.5rem;">
+                <div class="sidebar-item-title">An Isolated Single Stage Single Phase Micro-Inverter topology with integrated magnetics</div>
+                <p class="sidebar-item-desc">
+                    <strong>Conference Paper</strong><br>
+                    IEEE Energy Conversion Congress and Exposition (ECCE), Sep 2019
+                </p>
+            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CV -->
+        <section id="page-cv" class="page-section">
+            <div class="grid-layout">
+                <div>
+                    <h2 class="section-title">Professional Timeline</h2>
+                    <div class="timeline">
+                        
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">PLM & Hardware Release Coordinator (Governance Role)</h3>
+                <span class="timeline-period">April 2025 - Present</span>
+            </div>
+            <div class="timeline-company">dcbel inc. (Montreal, Quebec, Canada)</div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Govern the hardware lifecycle release pipeline, manage the central CAD database, and enforce documentation compliance standards across the hardware engineering team. Act as the release gatekeeper between design engineering, quality assurance, and manufacturing partners.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>PLM &amp; Release Pipeline Governance:</strong> Served as the designated Engineering Change Order (ECO) writer for the hardware engineering team, authoring and routing change packages in Arena PLM. Audited schematics, multi-layer board layouts, and bills of materials (BOMs) to verify completeness and adherence to internal standards before release.</li>
+<li><strong>Altium 365 CAD Database Management:</strong> Managed the Altium 365 database library (DBLib), auditing footprints and schematic symbols to prevent layout errors and ensure component compatibility. Standardized component templates and parameters, enforcing classification standards (e.g., target voltages, tolerances, package sizes) to streamline component sourcing.</li>
+<li><strong>Manufacturing Handover &amp; SOPs:</strong> Coordinated the engineering handover to manufacturing operations, ensuring complete documentation packages (Gerbers, ODB++, assembly drawings, coordinate files) were delivered to contract manufacturers for NPI (New Product Introduction) builds. Formulated and documented extensive SOPs, layout guidelines, and design checklists to standardize CAD operations.</li>
+</ul>
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">Power Electronics Engineer (Permanent Full-time)</h3>
+                <span class="timeline-period">November 2022 - Present</span>
+            </div>
+            <div class="timeline-company">dcbel inc. (Montreal, Quebec, Canada)</div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Architect and develop power conversion stages, protection schemes, and safety compliance pipelines for high-power, safety-critical residential microgrid and Energy Storage System (ESS) platforms. Responsible for end-to-end hardware delivery—from simulation and schematic capture to compliance escrow, low-level firmware integration, and manufacturing scale.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>Power Conversion Stage Design:</strong> Engineered a high-voltage, high-density 14kW bidirectional ESS DC/DC converter using a half-bridge topology, active precharge networks, and economized relay controls. Sized and validated power components to support Locked Rotor Amperage (LRA) and a 10s power boost up to 20kW.</li>
+<li><strong>Solar DC Optimizer &amp; Safety:</strong> Designed a 400W-600W solar DC optimizer featuring active MPPT, rapid shutdown circuits, and Power Line Communication (PLC) telemetry links. Co-authored <strong>US Patent 12,658,699</strong> outlining the overvoltage protection control and rapid shutdown apparatus.</li>
+<li><strong>Forensics &amp; Diagnostics:</strong> Resolved false IGBT DESAT tripping during EV charger cable verification checks under light bleeder currents using first-principles diagnostics. Mitigated noise susceptibility at the gate driver sense node by synthesizing custom hardware gate filters.</li>
+<li><strong>Compliance &amp; Validation:</strong> Achieved safety and emissions certifications including UL 1741, UL 60730 Class B, and FCC Part 15.</li>
+</ul>
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">Digital Power Electronics Developer</h3>
+                <span class="timeline-period">April 2021 - November 2022</span>
+            </div>
+            <div class="timeline-company">GBatteries Energy inc. (Ottawa, Ontario, Canada)</div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Designed, simulated, and built high-frequency switched-mode battery cycling instruments to characterize advanced fast-charging profiles for Lithium-ion chemistries. Co-designed real-time digital control loop firmware and modeled feedback loop stability.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>High-Frequency GaN Converter Design:</strong> Designed high-frequency GaN bidirectional power converters (500kHz per phase) for specialized battery cycling instruments. Completed high-speed, multi-layer PCB layouts in Altium Designer, managing parasitics and isolation under fast dv/dt switching environments.</li>
+<li><strong>Firmware &amp; Control Loop Coding:</strong> Programmed real-time C/ASM firmware on microcontrollers, implementing deterministic assembly-level safety overrides and control clamps to prevent transient battery overshoots during high-rate transients.</li>
+<li><strong>Loop Stability Modeling:</strong> Modeled converter small-signal transfer functions and characterized loop margins (Gain/Phase) in LTspice to stabilize high-speed GaN converter loops.</li>
+</ul>
+<h2>Engineering Retrospective &amp; Hindsight</h2>
+<ul>
+<li><strong>Integrated GaN IC vs. Beefed-Up Discrete Stage:</strong><br>In designing the multistage battery cycling power instruments, we utilized an integrated GaN IC for one of the stages to minimize PCB footprint and simplify design. However, operating at high frequency (500kHz) with the integrated driver introduced complex thermal constraints and layout sensitivities. In retrospect, this stage would have been better served by a single beefed-up discrete silicon or GaN power stage switching at a lower frequency. This would have improved thermal dissipation, simplified the PCB layout, and lowered overall BOM cost without compromising the cycler&#39;s transient performance.</li>
+</ul>
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">Hardware Documents Coordinator (Documentation Role)</h3>
+                <span class="timeline-period">January 2022 - November 2022</span>
+            </div>
+            <div class="timeline-company">GBatteries Energy inc. (Ottawa, Ontario, Canada)</div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Represented the hardware engineering team on the company-wide documentation committee, coordinating standard operating procedures (SOPs) and technical knowledge transfer.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>Knowledge Base Launch:</strong> Launched a company-wide, markdown-based knowledge repository to preserve hardware design operating procedures and facilitate knowledge transfer.</li>
+<li><strong>Technical Authoring:</strong> Published technical articles on the company&#39;s power electronics systems and organized the structure of the hardware team&#39;s design guidelines to streamline onboarding.</li>
+</ul>
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">Graduate Research Assistant / M.Sc. Student</h3>
+                <span class="timeline-period">September 2018 - May 2021</span>
+            </div>
+            <div class="timeline-company"></div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Researched, simulated, and built a grid-connected 400W solar micro-inverter prototype based on a novel single-stage isolated flyback-family topology. Responsible for power stage design, custom magnetics fabrication, real-time control firmware programming, and hardware-in-the-loop validation.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>Converter Prototyping &amp; Integrated Magnetics:</strong> Co-invented and prototyped a novel, single-stage galvanically isolated micro-inverter topology with integrated magnetics. Fabricated custom hand-wound integrated magnetics on MnZn ferrite E-core structures, combining transformer and inductor functions to reduce core count.</li>
+<li><strong>Real-Time Control Loop Coding:</strong> Programmed 100kHz real-time control loops (including PLL grid synchronization and 2p2z average current compensators) in bare-metal C on a TI Delfino F28379D MCU.</li>
+<li><strong>Loop Stability &amp; Modeling:</strong> Built closed-loop electrical models in PLECS to validate control loop stability. Conducted post-build forensic analysis of layout parasitics and leakage inductance to characterize leakage losses, which guided advanced layout design standards in subsequent commercial roles.</li>
+</ul>
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+                <h3 class="timeline-role">Lead Avionics Developer (IRIS 3U CubeSat Team)</h3>
+                <span class="timeline-period">September 2019 - December 2020</span>
+            </div>
+            <div class="timeline-company"></div>
+            <div class="timeline-body markdown-body">
+                <h2>Role Overview</h2>
+<p>Led the hardware architecture, component selection, schematic capture, multi-layer PCB layout, and physical bring-up of the avionics stack for the IRIS 3U research nanosatellite under the Canadian Space Agency&#39;s Canadian CubeSat Project.</p>
+<h2>Core Accomplishments</h2>
+<ul>
+<li><strong>Multi-MCU Architecture Design:</strong> Selected and integrated a heterogeneous controller architecture to partition payload, power, and flight logic: a Microsemi SmartFusion2 SoC (OBC), an STM32F4 (Imaging Payload), and a TI MSP430 (EPS). Designed the system-level CAN bus communication network linking the boards.</li>
+<li><strong>Direct Energy Transfer (DET) Power Bus:</strong> Engineered the satellite&#39;s EPS power distribution network using a DET architecture and Sequential Switch Regulation (SSR) to manage LiFePO4 battery charging from solar arrays, eliminating central regulator single points of failure.</li>
+<li><strong>PCB Layout &amp; CSA Reviews:</strong> Laid out multi-layer PCBs in Altium Designer, optimizing thermal dissipation paths and mechanical envelopes for spaceflight. Escorted electrical designs through formal Preliminary (PDR) and Critical Design Reviews (CDR) hosted by panels of engineers from the Canadian Space Agency (CSA) and Nanoracks.</li>
+</ul>
+
+            </div>
+        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sidebar-section"><h3>Skills & Stack</h3><div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div>
+                <h4 style="font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Hardware & Power Design</h4>
+                <div class="skills-tags"><span class="skill-tag">Altium Designer</span><span class="skill-tag">Multi-layer PCB Layout</span><span class="skill-tag">High-Voltage Creepage/Clearance</span><span class="skill-tag">GaN Switching (500kHz)</span><span class="skill-tag">Integrated Magnetics Design</span><span class="skill-tag">Active Precharge Circuits</span><span class="skill-tag">Thermal Management (TIMs)</span><span class="skill-tag">EMI/EMC Filter Design</span></div></div>
+            <div>
+                <h4 style="font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Firmware & Simulation</h4>
+                <div class="skills-tags"><span class="skill-tag">Bare-metal C / C++</span><span class="skill-tag">Mixed Assembly (C/ASM)</span><span class="skill-tag">TI C2000 MCUs (Delfino)</span><span class="skill-tag">STM32 & MSP430 MCUs</span><span class="skill-tag">LTspice Simulation</span><span class="skill-tag">PLECS / MATLAB / Simulink</span><span class="skill-tag">CAN Bus Network Design</span><span class="skill-tag">Power Line Communication (PLC)</span></div></div>
+            <div>
+                <h4 style="font-family: var(--font-sans); font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Governance & Standards</h4>
+                <div class="skills-tags"><span class="skill-tag">TÜV SÜD Functional Safety</span><span class="skill-tag">UL 1741 / UL 60730 Class B</span><span class="skill-tag">FCC Part 15 Compliance</span><span class="skill-tag">Arena PLM</span><span class="skill-tag">ECO Workflow Management</span><span class="skill-tag">Altium 365 Library (DBLib)</span></div></div></div></div><div class="sidebar-section"><h3>Education</h3><ul class="sidebar-list">
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">Master of Science (M.Sc.) in Electrical and Computer Engineering</div>
+            <p class="sidebar-item-desc">
+                University of Manitoba, 2018 - 2021<br>
+                Focus: Solar micro-inverters & integrated magnetics
+            </p>
+        </li>
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">Bachelor of Science (B.Sc.) in Electrical Engineering (With Distinction)</div>
+            <p class="sidebar-item-desc">
+                University of Manitoba, 2013 - 2018<br>
+                Focus: Power and Energy systems
+            </p>
+        </li></ul></div><div class="sidebar-section"><h3>Certifications</h3><ul class="sidebar-list">
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">Functional Safety Engineer</div>
+            <p class="sidebar-item-desc">
+                TÜV SÜD <br>
+                Certified Functional Safety Engineer; applied safety lifecycle governance to residential microgrid software and hardware designs to satisfy UL 60730 Class B requirements.<br><a href="assets/certificates/tuv-sud-fusa.pdf" class="sleek-link" target="_blank" style="font-size: 0.8rem; font-family: var(--font-sans); display: inline-block; margin-top: 0.35rem; font-weight: 600; color: var(--accent);">View PDF Certificate &rarr;</a>
+            </p>
+        </li>
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">EMC Filter Design</div>
+            <p class="sidebar-item-desc">
+                Biricha Digital Power (Oct 2025)<br>
+                Focused on the analytical design of input/output DC/DC and AC/DC EMI filters to meet compliance specifications for EU/FCC conducted emission tests.<br><a href="assets/certificates/biricha-emc-filter-design.pdf" class="sleek-link" target="_blank" style="font-size: 0.8rem; font-family: var(--font-sans); display: inline-block; margin-top: 0.35rem; font-weight: 600; color: var(--accent);">View PDF Certificate &rarr;</a>
+            </p>
+        </li>
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">Design for EMI/EMC</div>
+            <p class="sidebar-item-desc">
+                HF magic Lab S.L (Jul 2025)<br>
+                Product layout and circuit design methodology to mitigate electromagnetic interference, utilizing circuit simulations and hardware debugging tools.<br><a href="assets/certificates/hf-magic-lab-emi-emc.pdf" class="sleek-link" target="_blank" style="font-size: 0.8rem; font-family: var(--font-sans); display: inline-block; margin-top: 0.35rem; font-weight: 600; color: var(--accent);">View PDF Certificate &rarr;</a>
+            </p>
+        </li></ul></div><div class="sidebar-section"><h3>Languages</h3><ul class="sidebar-list">
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">English</div>
+            <p class="sidebar-item-desc">Native or bilingual</p>
+        </li>
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">Yoruba</div>
+            <p class="sidebar-item-desc">Native or bilingual</p>
+        </li>
+        <li class="sidebar-item">
+            <div class="sidebar-item-title">French</div>
+            <p class="sidebar-item-desc">Elementary proficiency</p>
+        </li></ul></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FULL ARTICLE READER -->
+        <section id="article-reader-container" class="page-section" style="max-width: 850px; margin: 0 auto; padding-top: 1rem;">
+            <div id="full-article-content">
+                
+        <div id="article-electronics-bottom-up-01" class="full-article-page" style="display: none;">
+            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-electronics-from-the-bottom-up--a-first-principles-guide')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+            </nav>
+            <article class="markdown-body">
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">Rebuilding the Foundations</h1>
+                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                    <span><strong>Series:</strong> Electronics from the Bottom Up: A First-Principles Guide (Part 1)</span>
+                    <span><strong>Published:</strong> June 22, 2026</span>
+                    <span><strong>Category:</strong> Concepts</span>
+                </div>
+                <hr>
+<p>For years, I have navigated the complex world of electrical engineering, accumulating educational accomplishments and mastering the intricate mathematics required to design advanced systems. Yet, despite this rigorous training, I eventually hit a conceptual wall. The traditional, &quot;top-down&quot; approach to electronics education relies heavily on mathematical abstraction, teaching us to treat components as black boxes—resistors as simple dividers, capacitors as mathematical integrators, and inductors as differentiators. While this scales well for passing exams, it asks us to memorize effects before we truly understand their underlying causes. For an experienced engineer, this abstraction ultimately becomes a conceptual cage. I realized I was missing a fundamental, tactile connection to the very forces I was manipulating.</p>
+<p>That realization is the genesis of this series, <em>Electronics from the Bottom Up: A First-Principles Guide</em>.</p>
+<p>In traditional studies, we are often handed formulas as if they were holy scripture. We are taught to solve matrices and balance equations, but we lose sight of the physical reality happening within the copper and silicon. I embarked on a journey to reconstruct my understanding of electronics from the ground up, moving away from treating components as abstract mathematical operators and instead viewing them through a charge-centric, physics-first lens.</p>
+<p>In this series, we will discard the abstraction and view the circuit as a tangible, physical territory. We will re-examine voltage not merely as a variable in an equation, but as a spatial pressure—a mandate from a power source attempting to exert its will upon a vast crowd of charge carriers. We will explore the &quot;Tragedy of the Source,&quot; where the orderly intent of this pressure is squandered as an entropic toll by the resistor, a component that acts as a chaotic, vibrating obstacle course that steals energy as heat.</p>
+<p>From there, we will rebuild the passive components into mechanical realities. You will no longer see the capacitor merely as a mathematical derivative of voltage; instead, you will understand it as a &quot;Stretchy Room,&quot; a space where energy is hoarded in the physical tension of dielectric atoms leaning into an electric field. We will demystify the inductor by revealing the &quot;Vortex of Lag,&quot; showing how a coil of wire acts as a &quot;Heavy Flywheel&quot; that stores energy in the kinetic momentum of a magnetic wake.</p>
+<p>Finally, we will unite these concepts into a &quot;Mechanical Symphony,&quot; bridging the gap between fundamental solid-state physics and practical AC circuit design. By replacing abstract symbols with a mechanical intuition of tension and momentum, the confusing formulas fade away, leaving a clear, intuitive mastery of electromagnetic fields and particle dynamics.</p>
+<p>Whether you are a student struggling to visualize field theory, or a seasoned professional frustrated by the limitations of traditional circuit models, I invite you to join me. Let us rebuild our understanding of electronics from the bottom up.</p>
+
+            </article>
+        </div>
+        <div id="article-electronics-bottom-up-02" class="full-article-page" style="display: none;">
+            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-electronics-from-the-bottom-up--a-first-principles-guide')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+            </nav>
+            <article class="markdown-body">
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">The Tragedy of the Source</h1>
+                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                    <span><strong>Series:</strong> Electronics from the Bottom Up: A First-Principles Guide (Part 2)</span>
+                    <span><strong>Published:</strong> June 29, 2026</span>
+                    <span><strong>Category:</strong> Concepts</span>
+                </div>
+                <hr>
+<p><em>Note: This is a preview/draft entry in the series.</em></p>
+<p>In our first-principles journey, we re-examine voltage not merely as a variable in an equation, but as a spatial pressure—a mandate from a power source attempting to exert its will upon a vast crowd of charge carriers. </p>
+<p>In this article, we will explore the &quot;Tragedy of the Source,&quot; where the orderly intent of this pressure is squandered as an entropic toll by the resistor. A resistor acts as a chaotic, vibrating obstacle course that steals energy as heat. We will look at how charge carriers collide with the atomic lattice, converting electrical potential energy into thermal vibrations, and derive Ohm&#39;s law from particle drift velocities.</p>
+
+            </article>
+        </div>
+        <div id="article-electronics-bottom-up-03" class="full-article-page" style="display: none;">
+            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-electronics-from-the-bottom-up--a-first-principles-guide')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+            </nav>
+            <article class="markdown-body">
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">The Stretchy Room</h1>
+                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                    <span><strong>Series:</strong> Electronics from the Bottom Up: A First-Principles Guide (Part 3)</span>
+                    <span><strong>Published:</strong> July 6, 2026</span>
+                    <span><strong>Category:</strong> Concepts</span>
+                </div>
+                <hr>
+<p><em>Note: This is a preview/draft entry in the series.</em></p>
+<p>You will no longer see the capacitor merely as a mathematical derivative of voltage. Instead, we will understand it as a &quot;Stretchy Room,&quot; a space where energy is hoarded in the physical tension of dielectric atoms leaning into an electric field.</p>
+<p>In this chapter, we will build a mechanical model of capacitive energy storage. By visualizing the displacement of charges under electrostatic pressure, we will develop a tactile intuition for capacitance, dielectric breakdown, and energy density without relying on abstract differential equations.</p>
+
+            </article>
+        </div>
+        <div id="article-forensics-case-study-02" class="full-article-page" style="display: none;">
+            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-forensics-case-studies')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+            </nav>
+            <article class="markdown-body">
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">LTspice Forensics: Tuning Closed-Loop Stability for High-Speed GaN Power Stages</h1>
+                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                    <span><strong>Series:</strong> Forensics Case Studies (Part 2)</span>
+                    <span><strong>Published:</strong> July 12, 2026</span>
+                    <span><strong>Category:</strong> Engineering Forensics</span>
+                </div>
+                <hr>
+<p><em>Note: This is a preview/draft entry in the series.</em></p>
+<p>In this case study, we investigate a closed-loop stability failure in a high-speed GaN converter. During load step transient testing, the converter exhibited severe voltage ringing and eventual overvoltage shutdown.</p>
+<p>We trace the issue using first-principles loop diagnostics:</p>
+<ol>
+<li><strong>Loop Gain Analysis:</strong> Simulating the converter&#39;s loop gain in LTspice and measuring it with a network analyzer.</li>
+<li><strong>Identifying the Culprit:</strong> Tracing the instability to a phase margin drop ($&lt;30^\circ$) at the crossover frequency due to parasitic board layout inductance and driver propagation delays.</li>
+<li><strong>The Fix:</strong> Redesigning the digital compensator by adding high-frequency poles to boost the phase margin to a stable $55^\circ$.</li>
+</ol>
+
+            </article>
+        </div>
+        <div id="article-igbt-desat-forensics" class="full-article-page" style="display: none;">
+            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-forensics-case-studies')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+            </nav>
+            <article class="markdown-body">
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">IGBT Desaturation Forensics: Debugging False Trips under Light Bleeder Currents</h1>
+                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                    <span><strong>Series:</strong> Forensics Case Studies (Part 1)</span>
+                    <span><strong>Published:</strong> June 15, 2026</span>
+                    <span><strong>Category:</strong> Engineering Forensics</span>
+                </div>
+                <hr>
+<h2>The Symptom</h2>
+<p>During the commercial commissioning of a high-power bidirectional EV charger, the system-level controller reported sporadic desaturation (DESAT) faults on the main switching inline IGBTs. Interestingly, these faults did not occur during peak power transfer (14kW) or during severe load steps. Instead, they tripped exclusively during the initial <strong>cable check startup sequence</strong>, when the vehicle contactors were still open, and the charger was operating under an extremely light bleeder current (approx. 50–100mA).</p>
+<p>Whenever a fault was flagged, the gate driver automatically shut down the power stage within 2 microseconds to protect the silicon. This brought the entire charging handshake process to a grinding halt.</p>
+<hr>
+<h2>First-Principles of DESAT Detection</h2>
+<p>Before diving into the forensics, it is worth reviewing the operating principle of a classic desaturation protection circuit:</p>
+<pre><code>            +V_cc (e.g. +15V)
+               |
+              [R_pullup]
+               |
+               +-------+------&gt; To DESAT Comparator Input
+               |       |
+             [C_blank] |
+               |     [D_desat]
+              GND      |
+                       v  (IGBT Collector)
+                     |\
+                     | \___ 
+                     | /   |
+                     |/____|
+                       |
+                       v  (IGBT Emitter)
+</code></pre>
+<ol>
+<li><strong>On-State:</strong> When the IGBT is turned ON, its collector-emitter voltage ($V_{ce}$) should drop to its saturation voltage, typically $V_{ce(sat)} \approx 1.5\text{V} - 2.5\text{V}$.</li>
+<li><strong>Short-Circuit:</strong> If a short-circuit occurs, the current shoots up, pulling the device out of saturation. $V_{ce}$ rises rapidly toward the DC bus voltage ($400\text{V} - 800\text{V}$).</li>
+<li><strong>Detection:</strong> The diode $D_{desat}$ blocks the high voltage, allowing the internal pull-up resistor $R_{pullup}$ to charge the blanking capacitor $C_{blank}$. If the voltage across $C_{blank}$ exceeds a set threshold (typically $6.5\text{V} - 9\text{V}$), the comparator trips the shutdown.</li>
+<li><strong>Blanking Time:</strong> Because $V_{ce}$ takes time to fall during turn-on, the blanking capacitor $C_{blank}$ prevents the comparator from tripping during the transition. The blanking time is defined by:<br>$$ t_{blank} = \frac{C_{blank} \cdot V_{th}}{I_{charge}} $$</li>
+</ol>
+<hr>
+<h2>The Investigation</h2>
+<p>We captured high-resolution waveforms of the Gate-Emitter voltage ($V_{ge}$), Collector-Emitter voltage ($V_{ce}$), and the DESAT pin voltage during the failure event:</p>
+<pre><code>V_ge  ____/~~~~~~~~~~~~~~~~~~~~~~~  (Gate Turn-on)
+V_ce  ~~~~~~~\____________________  (Collector voltage drops)
+DESAT _________/~\________________  (False trip threshold spike!)
+               ^
+          Switching transition
+</code></pre>
+<h3>The Anomaly</h3>
+<p>At turn-on, $V_{ce}$ began dropping as expected. However, because the bleeder current was so low, the IGBT&#39;s internal charge carrier density did not establish itself quickly enough. The collector-emitter capacitance ($C_{oes}$) charged and discharged slowly under light loading. This resulted in an prolonged tail-time for $V_{ce}$ to reach its fully saturated $1.5\text{V}$ state.</p>
+<p>The prolonged $V_{ce}$ fall-time exceeded the configured blanking time ($t_{blank} = 1.5\mu\text{s}$). Consequently, the DESAT diode remained reverse-biased longer than expected, allowing the pull-up current source to charge $C_{blank}$ all the way up to the $7.0\text{V}$ comparator threshold, triggering a false desaturation trip.</p>
+<h3>The Secondary Culprit: Gate Noise Coupling</h3>
+<p>To make matters worse, zoom-in captures of the switching transition revealed high-frequency voltage spikes ($dv/dt$ transients) coupling from the collector back to the gate driver circuit through the IGBT&#39;s reverse transfer capacitance ($C_{res}$ or Miller capacitance). This noise coupled directly onto the high-impedance DESAT detection trace, causing the capacitor $C_{blank}$ to charge prematurely.</p>
+<hr>
+<h2>The Solution</h2>
+<p>To resolve the false trips without modifying the power silicon or altering the physical layout of the high-voltage PCB, we synthesized a dual-action hardware and firmware mitigation:</p>
+<ol>
+<li><strong>Hardware Filter Tuning:</strong> <ul>
+<li>We increased the blanking capacitor $C_{blank}$ from $100\text{pF}$ to $220\text{pF}$, which extended the blanking time from $1.5\mu\text{s}$ to $3.3\mu\text{s}$. This gave the collector voltage enough time to fully settle under ultra-light current states.</li>
+<li>We added a small $10\Omega$ series resistor in line with $D_{desat}$ and a local $22\text{pF}$ high-frequency ceramic decoupling capacitor directly across the DESAT comparator pin to suppress high $dv/dt$ transient noise coupling.</li>
+</ul>
+</li>
+<li><strong>Firmware Sequence Adaptation:</strong><ul>
+<li>We modified the startup code to pre-load the DC bus slightly before initiating the cable check. This increased the starting current loop to $250\text{mA}$ during the initial turn-on pulses, speeding up the carrier charge sweep inside the IGBT drift region.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>The Verdict</h2>
+<p>After applying these updates, we re-ran the startup sequence across the full operational temperature range ($-40^\circ\text{C}$ to $+85^\circ\text{C}$). The false DESAT trips were completely eliminated. The system consistently cleared the cable check sequence, maintaining full protection capability against genuine overcurrent and short-circuit faults (verified by intentionally triggering a short-circuit fault in a safe lab environment, where the shutdown occurred in under $2.8\mu\text{s}$).</p>
+<p>This case study is a testament to the importance of evaluating power electronics controls not just at full load, but also at the operating boundaries where component non-linearities and parasite physics behave in unexpected ways.</p>
+
+            </article>
+        </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Hafis Umar-Lawal. Typeset in Lora & Inter. Built from local career assets.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/hafis-u-33a31796/" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/omo-wura" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Client-Side Router & UI Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Switcher ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+            const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+
+            function updateToggleIcons(theme) {
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                } else {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                }
+            }
+
+            // Get initial state
+            let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            updateToggleIcons(currentTheme);
+
+            // Toggle theme click handler
+            themeToggleBtn.addEventListener('click', () => {
+                const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('theme', nextTheme);
+                currentTheme = nextTheme;
+                updateToggleIcons(currentTheme);
+            });
+
+            // --- Client-Side Router ---
+            function handleRouting() {
+                let hash = window.location.hash.substring(1) || 'about';
+                
+                // Check if it is an article sub-route (e.g. #writing/igbt-desat-forensics)
+                if (hash.startsWith('writing/')) {
+                    const slug = hash.substring(8);
+                    
+                    // Hide all main page sections
+                    document.querySelectorAll('.page-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show article reader section
+                    const reader = document.getElementById('article-reader-container');
+                    if (reader) {
+                        reader.classList.add('active');
+                    }
+                    
+                    // Hide all full articles inside the container
+                    document.querySelectorAll('.full-article-page').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    
+                    // Show specific article
+                    const targetArticle = document.getElementById('article-' + slug);
+                    if (targetArticle) {
+                        targetArticle.style.display = 'block';
+                        
+                        // Highlight code blocks on demand
+                        if (window.Prism) Prism.highlightAllUnder(targetArticle);
+                        
+                        // Render LaTeX equations on demand
+                        if (window.renderMathInElement) {
+                            renderMathInElement(targetArticle, {
+                                delimiters: [
+                                    {left: '$$', right: '$$', display: true},
+                                    {left: '$', right: '$', display: false}
+                                ]
+                            });
+                        }
+                    }
+                    
+                    // Deactivate active links in main menu
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                
+                // Hide article reader if showing normal page
+                const reader = document.getElementById('article-reader-container');
+                if (reader) {
+                    reader.classList.remove('active');
+                }
+
+                // Standard SPA section toggle
+                const validSections = ['about', 'projects', 'writing', 'cv'];
+                if (!validSections.includes(hash)) {
+                    hash = 'about';
+                }
+
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show active section
+                const activeSection = document.getElementById('page-' + hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+
+                // Update navigation active states
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-target') === hash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Route initial load and hash changes
+            window.addEventListener('hashchange', handleRouting);
+            handleRouting();
+        });
+
+        // Global toggle for series expansions
+        function toggleSeriesExpansion(id) {
+            const content = document.getElementById(id);
+            const btn = document.getElementById('btn-explore-' + id);
+            const arrow = btn.querySelector('.arrow');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                arrow.innerHTML = '&#9652;'; // up arrow
+                btn.style.color = 'var(--accent)';
+            } else {
+                content.style.display = 'none';
+                arrow.innerHTML = '&#9662;'; // down arrow
+                btn.style.color = 'var(--text-muted)';
+            }
+        }
+
+        // Go back to writing tab and scroll to a specific series
+        function goBackToSeries(seriesId) {
+            window.location.hash = '#writing';
+            setTimeout(() => {
+                const target = document.getElementById(seriesId);
+                if (target) {
+                    // Open the series if it is collapsed
+                    const expansionId = 'expand-' + seriesId;
+                    const content = document.getElementById(expansionId);
+                    if (content && (content.style.display === 'none' || content.style.display === '')) {
+                        toggleSeriesExpansion(expansionId);
+                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
