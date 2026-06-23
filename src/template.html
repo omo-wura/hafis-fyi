@@ -43,7 +43,8 @@
                 <a href="#about" class="nav-link" data-target="about">About</a>
                 <a href="#projects" class="nav-link" data-target="projects">Projects & Research</a>
                 <a href="#writing" class="nav-link" data-target="writing">Writing</a>
-                <a href="#cv" class="nav-link" data-target="cv">CV</a>
+                <a href="#resume" class="nav-link" data-target="resume">Resume</a>
+                <a href="#contact" class="nav-link" data-target="contact">Contact</a>
             </nav>
             
             <!-- Dark Mode Toggle Button -->
@@ -121,11 +122,11 @@
             </div>
         </section>
 
-        <!-- SECTION 4: CV -->
-        <section id="page-cv" class="page-section">
+        <!-- SECTION 4: RESUME -->
+        <section id="page-resume" class="page-section">
             <!-- Full-width Profile Summary & Bento -->
-            <div class="cv-intro-container">
-                <p class="cv-summary">
+            <div class="resume-intro-container">
+                <p class="resume-summary">
                     {{CV_SUMMARY}}
                 </p>
                 
@@ -145,7 +146,7 @@
                     </div>
                 </div>
                 
-                <div class="cv-divider"></div>
+                <div class="resume-divider"></div>
             </div>
 
             <div class="grid-layout">
@@ -161,7 +162,51 @@
             </div>
         </section>
 
-        <!-- SECTION 5: FULL ARTICLE READER -->
+        <!-- SECTION 5: CONTACT -->
+        <section id="page-contact" class="page-section">
+            <div class="contact-container">
+                <h2 class="section-title" style="margin-bottom: 2.5rem;">Get In Touch</h2>
+                
+                <div class="contact-notice">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <div>
+                        <strong>Monitored Inbox:</strong> This form sends messages directly to my primary, actively monitored personal email. I review all inquiries and respond personally.
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <form action="{{CONTACT_ENDPOINT}}" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" name="_replyto" class="form-control" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" name="subject" class="form-control" placeholder="What is this regarding?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" class="form-control" placeholder="Your message here..." required></textarea>
+                        </div>
+                        <!-- Honey pot spam protection for static forms -->
+                        <input type="hidden" name="_gotcha" style="display:none">
+                        
+                        <div style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: FULL ARTICLE READER -->
         <section id="article-reader-container" class="page-section" style="max-width: 850px; margin: 0 auto; padding-top: 1rem;">
             <div id="full-article-content">
                 {{FULL_ARTICLES}}
@@ -172,7 +217,7 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <p>&copy; 2026 {{NAME}}. Typeset in Lora & Inter. Built from local career assets.</p>
+        <p>&copy; 2026 {{NAME}}. All rights reserved.</p>
         <div class="social-links">
             <a href="{{LINKEDIN}}" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -273,7 +318,7 @@
                 }
 
                 // Standard SPA section toggle
-                const validSections = ['about', 'projects', 'writing', 'cv'];
+                const validSections = ['about', 'projects', 'writing', 'resume', 'contact'];
                 if (!validSections.includes(hash)) {
                     hash = 'about';
                 }

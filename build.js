@@ -605,7 +605,8 @@ function main() {
         .replace(/{{SIDEBAR}}/g, () => sidebarHTML)
         .replace(/{{STYLES}}/g, () => stylesContent)
         .replace(/{{LINKEDIN}}/g, () => profile.linkedin)
-        .replace(/{{GITHUB}}/g, () => profile.github);
+        .replace(/{{GITHUB}}/g, () => profile.github)
+        .replace(/{{CONTACT_ENDPOINT}}/g, () => profile.contact_endpoint || '#');
         
     // 7. Write to index.html
     fs.writeFileSync(paths.output, outputHTML, 'utf8');

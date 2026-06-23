@@ -635,14 +635,14 @@ pre[class*="language-"] {
     color: #09090b;
 }
 
-/* CV Page Timeline */
-.cv-container {
+/* Resume Page Timeline */
+.resume-container {
     display: flex;
     flex-direction: column;
     gap: 3rem;
 }
 
-.cv-section-header {
+.resume-section-header {
     font-family: var(--font-sans);
     font-size: 1.25rem;
     font-weight: 800;
@@ -651,12 +651,12 @@ pre[class*="language-"] {
     padding-bottom: 0.5rem;
 }
 
-/* CV Intro, Summary, Bento box and buttons */
-.cv-intro-container {
+/* Resume Intro, Summary, Bento box and buttons */
+.resume-intro-container {
     margin-bottom: 3.5rem;
 }
 
-.cv-summary {
+.resume-summary {
     font-family: var(--font-serif);
     font-size: 1.15rem;
     line-height: 1.85;
@@ -795,7 +795,7 @@ pre[class*="language-"] {
     transform: translateY(-1px);
 }
 
-.cv-divider {
+.resume-divider {
     height: 1px;
     background-color: var(--border);
     margin: 3.5rem 0 2.5rem 0;
@@ -1051,4 +1051,84 @@ pre[class*="language-"] {
     width: 16px;
     height: 16px;
     fill: currentColor;
+}
+
+/* Contact Form Styles */
+.contact-container {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+}
+
+.form-control {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    transition: all 0.25s var(--transition-curve);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-notice {
+    background-color: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.contact-notice svg {
+    flex-shrink: 0;
+    color: var(--accent);
+    margin-top: 0.15rem;
 }
