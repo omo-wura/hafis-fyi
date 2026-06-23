@@ -606,6 +606,45 @@ pre[class*="language-"] {
     margin-bottom: 1rem;
 }
 
+/* Explore Series Button (Pill Badge Style) */
+.explore-series-btn {
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: var(--accent);
+    background-color: var(--accent-light);
+    border: 1px solid var(--accent);
+    padding: 0.45rem 1.15rem;
+    border-radius: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    transition: all 0.25s var(--transition-curve);
+    box-shadow: var(--shadow-sm);
+}
+
+.explore-series-btn:hover {
+    background-color: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 4px 12px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .explore-series-btn:hover {
+    color: #09090b;
+}
+
+.explore-series-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+[data-theme="dark"] .explore-series-btn.active {
+    color: #09090b;
+}
+
 /* CV Page Timeline */
 .cv-container {
     display: flex;
@@ -620,6 +659,156 @@ pre[class*="language-"] {
     margin-bottom: 1.5rem;
     border-bottom: 2px solid var(--border);
     padding-bottom: 0.5rem;
+}
+
+/* CV Intro, Summary, Bento box and buttons */
+.cv-intro-container {
+    margin-bottom: 3.5rem;
+}
+
+.cv-summary {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 2.25rem;
+    max-width: 900px;
+}
+
+.bento-box.current-positions-bento {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.25rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s var(--transition-curve);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-box.current-positions-bento:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.bento-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+}
+
+.bento-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .bento-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+}
+
+.bento-header h3 {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.bento-date {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.bento-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+}
+
+.bento-description strong {
+    color: var(--text-primary);
+}
+
+.bento-footer {
+    display: flex;
+    align-items: center;
+}
+
+/* Button style */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s var(--transition-curve);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .btn-primary {
+    color: #09090b;
+}
+
+.btn-primary:hover {
+    background-color: var(--text-primary);
+    color: var(--bg);
+    box-shadow: 0 8px 20px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: #fafafa;
+    color: #09090b;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 4px 12px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+.cv-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 3.5rem 0 2.5rem 0;
 }
 
 .timeline {
@@ -1013,7 +1202,12 @@ pre[class*="language-"] {
 <li><strong>Safety &amp; Protections:</strong> Integrate active precharge paths, ground fault detection, and fast-acting fuses to handle high short-circuit currents.</li>
 </ul>
 <hr>
-<h2>2. Electrical &amp; Mechanical Architecture</h2>
+
+            </div>
+            
+            <div id="project-details-dcbel-residential-microgrid" class="project-details-expansion" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border);">
+                <div class="markdown-body">
+                    <h2>2. Electrical &amp; Mechanical Architecture</h2>
 <pre><code>                 +-----------------------------------+
                  |        14kW ESS DC/DC Stage       |
   [ESS Pack] ---&gt;| [Fuses] -&gt; [Relays] -&gt; [Precharge]|---&gt; [Internal DC Bus]
@@ -1054,6 +1248,11 @@ pre[class*="language-"] {
 <li><strong>Solution:</strong> Conducted first-principles forensic analysis on the IGBT gates. Traced the issue to the physical sensitivity of the IGBTs under very low-current bleeder loads (where the vehicle contactors were still open). Solved the issue by synthesizing a custom hardware noise filter and adjusting the gate driver blanking time, restoring system stability.</li>
 </ul>
 
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <a href="javascript:void(0)" id="btn-project-dcbel-residential-microgrid" onclick="toggleProjectExpansion('dcbel-residential-microgrid')" class="btn btn-outline">Read Full Case Study &rarr;</a>
             </div>
         </article>
         <article class="project-card">
@@ -1074,7 +1273,12 @@ pre[class*="language-"] {
 <li><strong>Governance:</strong> Escrow and present all electrical hardware designs through formal Canadian Space Agency (CSA) reviews.</li>
 </ul>
 <hr>
-<h2>2. Distributed Power &amp; Bus Architecture</h2>
+
+            </div>
+            
+            <div id="project-details-iris-cubesat-avionics" class="project-details-expansion" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border);">
+                <div class="markdown-body">
+                    <h2>2. Distributed Power &amp; Bus Architecture</h2>
 <pre><code>                       +----------------------------------+
                        |           EPS Board              |
   [Solar Panels] -----&gt;|  - MSP430 Regulator (DET / SSR)  |
@@ -1122,6 +1326,11 @@ pre[class*="language-"] {
 <li><strong>Ideal Diodes vs. Hot-Swap Inrush Control:</strong><br>In the initial EPS design, we opted for ideal diodes to handle power path selection and reverse current protection. While this minimized forward voltage drops and heat dissipation, ideal diodes do not provide active current limit control during hot-plugging events. In hindsight, implementing a dedicated hot-swap controller with active inrush current control (slew-rate control on the MOSFET gate) would have been a superior design choice. It would have provided robust short-circuit protection and prevented transient voltage dips on the shared DET power bus during card insertion or subsystem power-up.</li>
 </ul>
 
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <a href="javascript:void(0)" id="btn-project-iris-cubesat-avionics" onclick="toggleProjectExpansion('iris-cubesat-avionics')" class="btn btn-outline">Read Full Case Study &rarr;</a>
             </div>
         </article>
         <article class="project-card">
@@ -1138,7 +1347,12 @@ pre[class*="language-"] {
 <h2>1. Technical Concept &amp; Objectives</h2>
 <p>To lower the cost and component count of grid-tied solar systems, this project designed and built a single-stage, isolated solar micro-inverter. Instead of traditional cascaded stages (DC/DC boost followed by a DC/AC inverter), this design utilized a novel flyback-family topology that integrates the isolation transformer and buck-boost inductors onto a single magnetic core (integrated magnetics).</p>
 <hr>
-<h2>2. System Architecture &amp; Controls</h2>
+
+            </div>
+            
+            <div id="project-details-solar-micro-inverter-thesis" class="project-details-expansion" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border);">
+                <div class="markdown-body">
+                    <h2>2. System Architecture &amp; Controls</h2>
 <pre><code>  [PV Input] ---&gt; [Integrated Magnetic Stage] ---&gt; [Unfolding Bridge] ---&gt; [Utility Grid]
        |                      ^                           ^
    (Vpv, Ipv)                 | (100kHz PWM)              | (Line Freq)
@@ -1176,6 +1390,11 @@ pre[class*="language-"] {
 <li><strong>Insulation Coordination:</strong> Guided the clearances and creepages implemented in high-voltage 14kW stages at dcbel.</li>
 </ul>
 
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <a href="javascript:void(0)" id="btn-project-solar-micro-inverter-thesis" onclick="toggleProjectExpansion('solar-micro-inverter-thesis')" class="btn btn-outline">Read Full Case Study &rarr;</a>
             </div>
         </article>
             </div>
@@ -1211,12 +1430,12 @@ pre[class*="language-"] {
                 
                 <!-- Explore Series Accordion Toggle -->
                 
-                    <div style="margin-top: 1.25rem;">
-                        <a href="javascript:void(0)" id="btn-explore-expand-series-electronics-from-the-bottom-up--a-first-principles-guide" onclick="toggleSeriesExpansion('expand-series-electronics-from-the-bottom-up--a-first-principles-guide')" class="explore-series-btn" style="font-family: var(--font-sans); font-size: 0.825rem; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
-                            Explore Series (2 More Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="javascript:void(0)" id="btn-explore-expand-series-electronics-from-the-bottom-up--a-first-principles-guide" onclick="toggleSeriesExpansion('expand-series-electronics-from-the-bottom-up--a-first-principles-guide')" class="explore-series-btn">
+                            Explore Series (3 Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
                         </a>
                         
-                        <div id="expand-series-electronics-from-the-bottom-up--a-first-principles-guide" style="display: none; margin-top: 1rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div id="expand-series-electronics-from-the-bottom-up--a-first-principles-guide" style="display: none; margin-top: 1.25rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
                             <div style="font-size: 0.95rem;">
                                 <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 1 &bull; June 22, 2026</div>
                                 <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
@@ -1230,6 +1449,13 @@ pre[class*="language-"] {
                                     <a href="#writing/electronics-bottom-up-02" class="sleek-link">The Tragedy of the Source</a>
                                 </h5>
                                 <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Exploring voltage as a spatial pressure and resistors as entropic vibrating obstacle courses that steal energy as heat.</p>
+                            </div>
+                            <div style="font-size: 0.95rem;">
+                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 3 &bull; July 6, 2026</div>
+                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
+                                    <a href="#writing/electronics-bottom-up-03" class="sleek-link">The Stretchy Room</a><span style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.1rem 0.35rem; border-radius: 4px; margin-left: 0.5rem; display: inline-block; vertical-align: middle;">Latest</span>
+                                </h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Demystifying the capacitor as a physical tension chamber where energy is stored in the displacement of dielectric charge.</p>
                             </div>
                         </div>
                     </div>
@@ -1258,18 +1484,25 @@ pre[class*="language-"] {
                 
                 <!-- Explore Series Accordion Toggle -->
                 
-                    <div style="margin-top: 1.25rem;">
-                        <a href="javascript:void(0)" id="btn-explore-expand-series-forensics-case-studies" onclick="toggleSeriesExpansion('expand-series-forensics-case-studies')" class="explore-series-btn" style="font-family: var(--font-sans); font-size: 0.825rem; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
-                            Explore Series (1 More Article) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="javascript:void(0)" id="btn-explore-expand-series-forensics-case-studies" onclick="toggleSeriesExpansion('expand-series-forensics-case-studies')" class="explore-series-btn">
+                            Explore Series (2 Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
                         </a>
                         
-                        <div id="expand-series-forensics-case-studies" style="display: none; margin-top: 1rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div id="expand-series-forensics-case-studies" style="display: none; margin-top: 1.25rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">
                             <div style="font-size: 0.95rem;">
                                 <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 1 &bull; June 15, 2026</div>
                                 <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
-                                    <a href="#writing/igbt-desat-forensics" class="sleek-link">IGBT Desaturation Forensics: Debugging False Trips under Light Bleeder Currents</a>
+                                    <a href="#writing/igbt-desat-forensics" class="sleek-link">IGBT Desaturation Forensics: Debugging False Trips under Light Load Currents</a>
                                 </h5>
-                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Troubleshooting sporadic desaturation (DESAT) faults on main switching IGBTs during high-voltage EV charger cable checks under ultra-light bleeder currents using first-principles gate-charge diagnostics.</p>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Troubleshooting sporadic desaturation (DESAT) faults on main switching IGBTs during high-voltage startup validation under ultra-light load currents using first-principles gate-charge diagnostics.</p>
+                            </div>
+                            <div style="font-size: 0.95rem;">
+                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part 2 &bull; July 12, 2026</div>
+                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
+                                    <a href="#writing/forensics-case-study-02" class="sleek-link">LTspice Forensics: Tuning Closed-Loop Stability for High-Speed GaN Power Stages</a><span style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.1rem 0.35rem; border-radius: 4px; margin-left: 0.5rem; display: inline-block; vertical-align: middle;">Latest</span>
+                                </h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">Investigating loop stability margin failures under transient load step testing, resolved via high-frequency poles in LTspice and network analysis.</p>
                             </div>
                         </div>
                     </div>
@@ -1313,9 +1546,34 @@ pre[class*="language-"] {
 
         <!-- SECTION 4: CV -->
         <section id="page-cv" class="page-section">
+            <!-- Full-width Profile Summary & Bento -->
+            <div class="cv-intro-container">
+                <p class="cv-summary">
+                    Power Electronics & Hardware Engineer specializing in the design, failure forensics, and operational lifecycle governance of safety-critical, high-density power conversion systems. Certified TÜV SÜD Functional Safety Engineer with deep expertise in residential microgrids, battery cyclers, and space avionics.
+                </p>
+                
+                <div class="bento-box current-positions-bento">
+                    <div class="bento-header">
+                        <h3>Active Positions at dcbel inc.</h3>
+                        <span class="bento-date">Nov 2022 – Present &bull; Montreal, QC</span>
+                    </div>
+                    <p class="bento-description">
+                        Operating in a dual capacity as a <strong>Power Electronics Engineer</strong> and <strong>PLM & Hardware Release Coordinator</strong>. I lead the design and safety validation of high-density bidirectional converters (such as the 14kW bidirectional ESS stage) while governing the hardware release pipelines, Altium 365 CAD databases, and Arena PLM ECO workflows.
+                    </p>
+                    <div class="bento-footer">
+                        <a href="assets/hafis-umar-lawal-resume.pdf" class="btn btn-primary" download>
+                            <svg viewBox="0 0 24 24" width="16" height="16" class="icon" style="fill: currentColor; margin-right: 0.5rem; vertical-align: middle;"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                            Download PDF Resume
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="cv-divider"></div>
+            </div>
+
             <div class="grid-layout">
                 <div>
-                    <h2 class="section-title">Professional Timeline</h2>
+                    <h2 class="section-title">Detailed Timeline</h2>
                     <div class="timeline">
                         
         <div class="timeline-item">
@@ -1590,7 +1848,7 @@ pre[class*="language-"] {
                 <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-forensics-case-studies')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
             </nav>
             <article class="markdown-body">
-                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">IGBT Desaturation Forensics: Debugging False Trips under Light Bleeder Currents</h1>
+                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">IGBT Desaturation Forensics: Debugging False Trips under Light Load Currents</h1>
                 <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
                     <span><strong>Series:</strong> Forensics Case Studies (Part 1)</span>
                     <span><strong>Published:</strong> June 15, 2026</span>
@@ -1598,8 +1856,8 @@ pre[class*="language-"] {
                 </div>
                 <hr>
 <h2>The Symptom</h2>
-<p>During the commercial commissioning of a high-power bidirectional EV charger, the system-level controller reported sporadic desaturation (DESAT) faults on the main switching inline IGBTs. Interestingly, these faults did not occur during peak power transfer (14kW) or during severe load steps. Instead, they tripped exclusively during the initial <strong>cable check startup sequence</strong>, when the vehicle contactors were still open, and the charger was operating under an extremely light bleeder current (approx. 50–100mA).</p>
-<p>Whenever a fault was flagged, the gate driver automatically shut down the power stage within 2 microseconds to protect the silicon. This brought the entire charging handshake process to a grinding halt.</p>
+<p>During the validation of a high-power bidirectional power converter, the system controller reported sporadic desaturation (DESAT) faults on the main switching IGBTs. Interestingly, these faults did not occur during peak power transfer or severe load steps. Instead, they tripped exclusively during the initial <strong>low-power startup sequence</strong>, when the output contactors were open and the system was operating under an extremely light auxiliary/bleeder current (typically 50–100mA).</p>
+<p>Whenever a fault was flagged, the gate driver automatically shut down the power stage within 2 microseconds to protect the silicon. This brought the entire startup sequence to a grinding halt.</p>
 <hr>
 <h2>First-Principles of DESAT Detection</h2>
 <p>Before diving into the forensics, it is worth reviewing the operating principle of a classic desaturation protection circuit:</p>
@@ -1622,8 +1880,8 @@ pre[class*="language-"] {
 </code></pre>
 <ol>
 <li><strong>On-State:</strong> When the IGBT is turned ON, its collector-emitter voltage ($V_{ce}$) should drop to its saturation voltage, typically $V_{ce(sat)} \approx 1.5\text{V} - 2.5\text{V}$.</li>
-<li><strong>Short-Circuit:</strong> If a short-circuit occurs, the current shoots up, pulling the device out of saturation. $V_{ce}$ rises rapidly toward the DC bus voltage ($400\text{V} - 800\text{V}$).</li>
-<li><strong>Detection:</strong> The diode $D_{desat}$ blocks the high voltage, allowing the internal pull-up resistor $R_{pullup}$ to charge the blanking capacitor $C_{blank}$. If the voltage across $C_{blank}$ exceeds a set threshold (typically $6.5\text{V} - 9\text{V}$), the comparator trips the shutdown.</li>
+<li><strong>Short-Circuit:</strong> If a short-circuit occurs, the current shoots up, pulling the device out of saturation. $V_{ce}$ rises rapidly toward the DC bus voltage.</li>
+<li><strong>Detection:</strong> The diode $D_{desat}$ blocks the high voltage, allowing the internal pull-up resistor $R_{pullup}$ (or current source) to charge the blanking capacitor $C_{blank}$. If the voltage across $C_{blank}$ exceeds a set threshold (typically $6.5\text{V} - 9\text{V}$), the comparator trips the shutdown.</li>
 <li><strong>Blanking Time:</strong> Because $V_{ce}$ takes time to fall during turn-on, the blanking capacitor $C_{blank}$ prevents the comparator from tripping during the transition. The blanking time is defined by:<br>$$ t_{blank} = \frac{C_{blank} \cdot V_{th}}{I_{charge}} $$</li>
 </ol>
 <hr>
@@ -1636,27 +1894,27 @@ DESAT _________/~\________________  (False trip threshold spike!)
           Switching transition
 </code></pre>
 <h3>The Anomaly</h3>
-<p>At turn-on, $V_{ce}$ began dropping as expected. However, because the bleeder current was so low, the IGBT&#39;s internal charge carrier density did not establish itself quickly enough. The collector-emitter capacitance ($C_{oes}$) charged and discharged slowly under light loading. This resulted in an prolonged tail-time for $V_{ce}$ to reach its fully saturated $1.5\text{V}$ state.</p>
-<p>The prolonged $V_{ce}$ fall-time exceeded the configured blanking time ($t_{blank} = 1.5\mu\text{s}$). Consequently, the DESAT diode remained reverse-biased longer than expected, allowing the pull-up current source to charge $C_{blank}$ all the way up to the $7.0\text{V}$ comparator threshold, triggering a false desaturation trip.</p>
+<p>At turn-on, $V_{ce}$ began dropping as expected. However, because the load current was so low, the IGBT&#39;s internal charge carrier density did not establish itself quickly enough. The collector-emitter output capacitance ($C_{oes}$) discharged slowly under light loading. This resulted in a prolonged fall-time for $V_{ce}$ to reach its fully saturated state.</p>
+<p>The prolonged $V_{ce}$ fall-time exceeded the configured blanking time ($t_{blank}$). Consequently, the DESAT diode remained reverse-biased longer than expected, allowing the pull-up current source to charge $C_{blank}$ all the way up to the comparator threshold, triggering a false desaturation trip.</p>
 <h3>The Secondary Culprit: Gate Noise Coupling</h3>
 <p>To make matters worse, zoom-in captures of the switching transition revealed high-frequency voltage spikes ($dv/dt$ transients) coupling from the collector back to the gate driver circuit through the IGBT&#39;s reverse transfer capacitance ($C_{res}$ or Miller capacitance). This noise coupled directly onto the high-impedance DESAT detection trace, causing the capacitor $C_{blank}$ to charge prematurely.</p>
 <hr>
 <h2>The Solution</h2>
-<p>To resolve the false trips without modifying the power silicon or altering the physical layout of the high-voltage PCB, we synthesized a dual-action hardware and firmware mitigation:</p>
+<p>To resolve the false trips without modifying the power silicon or altering the layout of the high-voltage PCB, we synthesized a dual-action hardware and firmware mitigation:</p>
 <ol>
 <li><strong>Hardware Filter Tuning:</strong> <ul>
-<li>We increased the blanking capacitor $C_{blank}$ from $100\text{pF}$ to $220\text{pF}$, which extended the blanking time from $1.5\mu\text{s}$ to $3.3\mu\text{s}$. This gave the collector voltage enough time to fully settle under ultra-light current states.</li>
-<li>We added a small $10\Omega$ series resistor in line with $D_{desat}$ and a local $22\text{pF}$ high-frequency ceramic decoupling capacitor directly across the DESAT comparator pin to suppress high $dv/dt$ transient noise coupling.</li>
+<li>We increased the blanking capacitor $C_{blank}$ to extend the blanking time (typically doubling it). This gave the collector voltage enough time to fully settle under ultra-light current states.</li>
+<li>We added a small series resistor in line with $D_{desat}$ and a local high-frequency ceramic decoupling capacitor directly across the DESAT comparator pin to suppress high $dv/dt$ transient noise coupling.</li>
 </ul>
 </li>
 <li><strong>Firmware Sequence Adaptation:</strong><ul>
-<li>We modified the startup code to pre-load the DC bus slightly before initiating the cable check. This increased the starting current loop to $250\text{mA}$ during the initial turn-on pulses, speeding up the carrier charge sweep inside the IGBT drift region.</li>
+<li>We modified the startup firmware to establish a minimum auxiliary load before pulsing the power stage. This increased the starting current loop during the initial turn-on pulses, speeding up the carrier charge sweep inside the IGBT drift region.</li>
 </ul>
 </li>
 </ol>
 <hr>
 <h2>The Verdict</h2>
-<p>After applying these updates, we re-ran the startup sequence across the full operational temperature range ($-40^\circ\text{C}$ to $+85^\circ\text{C}$). The false DESAT trips were completely eliminated. The system consistently cleared the cable check sequence, maintaining full protection capability against genuine overcurrent and short-circuit faults (verified by intentionally triggering a short-circuit fault in a safe lab environment, where the shutdown occurred in under $2.8\mu\text{s}$).</p>
+<p>After applying these updates, we re-ran the startup sequence across the full operational temperature range. The false DESAT trips were completely eliminated. The system consistently cleared the startup checks, maintaining full protection capability against genuine overcurrent and short-circuit faults (verified by intentionally triggering a short-circuit fault in a safe lab environment).</p>
 <p>This case study is a testament to the importance of evaluating power electronics controls not just at full load, but also at the operating boundaries where component non-linearities and parasite physics behave in unexpected ways.</p>
 
             </article>
@@ -1811,11 +2069,11 @@ DESAT _________/~\________________  (False trip threshold spike!)
             if (content.style.display === 'none' || content.style.display === '') {
                 content.style.display = 'block';
                 arrow.innerHTML = '&#9652;'; // up arrow
-                btn.style.color = 'var(--accent)';
+                btn.classList.add('active');
             } else {
                 content.style.display = 'none';
                 arrow.innerHTML = '&#9662;'; // down arrow
-                btn.style.color = 'var(--text-muted)';
+                btn.classList.remove('active');
             }
         }
 
@@ -1834,6 +2092,32 @@ DESAT _________/~\________________  (False trip threshold spike!)
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }, 100);
+        }
+
+        // Global toggle for projects case study details
+        function toggleProjectExpansion(slug) {
+            const content = document.getElementById('project-details-' + slug);
+            const btn = document.getElementById('btn-project-' + slug);
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                btn.innerHTML = 'Collapse Case Study &larr;';
+                // Trigger Code highlighting and Math rendering on demand
+                if (window.Prism) Prism.highlightAllUnder(content);
+                if (window.renderMathInElement) {
+                    renderMathInElement(content, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                }
+            } else {
+                content.style.display = 'none';
+                btn.innerHTML = 'Read Full Case Study &rarr;';
+                // Smooth scroll back to project card header
+                content.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
     </script>
 </body>

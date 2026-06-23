@@ -123,9 +123,34 @@
 
         <!-- SECTION 4: CV -->
         <section id="page-cv" class="page-section">
+            <!-- Full-width Profile Summary & Bento -->
+            <div class="cv-intro-container">
+                <p class="cv-summary">
+                    {{CV_SUMMARY}}
+                </p>
+                
+                <div class="bento-box current-positions-bento">
+                    <div class="bento-header">
+                        <h3>Active Positions at dcbel inc.</h3>
+                        <span class="bento-date">Nov 2022 – Present &bull; Montreal, QC</span>
+                    </div>
+                    <p class="bento-description">
+                        Operating in a dual capacity as a <strong>Power Electronics Engineer</strong> and <strong>PLM & Hardware Release Coordinator</strong>. I lead the design and safety validation of high-density bidirectional converters (such as the 14kW bidirectional ESS stage) while governing the hardware release pipelines, Altium 365 CAD databases, and Arena PLM ECO workflows.
+                    </p>
+                    <div class="bento-footer">
+                        <a href="assets/hafis-umar-lawal-resume.pdf" class="btn btn-primary" download>
+                            <svg viewBox="0 0 24 24" width="16" height="16" class="icon" style="fill: currentColor; margin-right: 0.5rem; vertical-align: middle;"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                            Download PDF Resume
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="cv-divider"></div>
+            </div>
+
             <div class="grid-layout">
                 <div>
-                    <h2 class="section-title">Professional Timeline</h2>
+                    <h2 class="section-title">Detailed Timeline</h2>
                     <div class="timeline">
                         {{CV_TIMELINE}}
                     </div>
@@ -290,11 +315,11 @@
             if (content.style.display === 'none' || content.style.display === '') {
                 content.style.display = 'block';
                 arrow.innerHTML = '&#9652;'; // up arrow
-                btn.style.color = 'var(--accent)';
+                btn.classList.add('active');
             } else {
                 content.style.display = 'none';
                 arrow.innerHTML = '&#9662;'; // down arrow
-                btn.style.color = 'var(--text-muted)';
+                btn.classList.remove('active');
             }
         }
 
@@ -313,6 +338,32 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }, 100);
+        }
+
+        // Global toggle for projects case study details
+        function toggleProjectExpansion(slug) {
+            const content = document.getElementById('project-details-' + slug);
+            const btn = document.getElementById('btn-project-' + slug);
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                btn.innerHTML = 'Collapse Case Study &larr;';
+                // Trigger Code highlighting and Math rendering on demand
+                if (window.Prism) Prism.highlightAllUnder(content);
+                if (window.renderMathInElement) {
+                    renderMathInElement(content, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                }
+            } else {
+                content.style.display = 'none';
+                btn.innerHTML = 'Read Full Case Study &rarr;';
+                // Smooth scroll back to project card header
+                content.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
     </script>
 </body>

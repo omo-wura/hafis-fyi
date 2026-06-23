@@ -596,6 +596,45 @@ pre[class*="language-"] {
     margin-bottom: 1rem;
 }
 
+/* Explore Series Button (Pill Badge Style) */
+.explore-series-btn {
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: var(--accent);
+    background-color: var(--accent-light);
+    border: 1px solid var(--accent);
+    padding: 0.45rem 1.15rem;
+    border-radius: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    transition: all 0.25s var(--transition-curve);
+    box-shadow: var(--shadow-sm);
+}
+
+.explore-series-btn:hover {
+    background-color: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 4px 12px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .explore-series-btn:hover {
+    color: #09090b;
+}
+
+.explore-series-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+[data-theme="dark"] .explore-series-btn.active {
+    color: #09090b;
+}
+
 /* CV Page Timeline */
 .cv-container {
     display: flex;
@@ -610,6 +649,156 @@ pre[class*="language-"] {
     margin-bottom: 1.5rem;
     border-bottom: 2px solid var(--border);
     padding-bottom: 0.5rem;
+}
+
+/* CV Intro, Summary, Bento box and buttons */
+.cv-intro-container {
+    margin-bottom: 3.5rem;
+}
+
+.cv-summary {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 2.25rem;
+    max-width: 900px;
+}
+
+.bento-box.current-positions-bento {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.25rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s var(--transition-curve);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-box.current-positions-bento:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.bento-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+}
+
+.bento-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .bento-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+}
+
+.bento-header h3 {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.bento-date {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.bento-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+}
+
+.bento-description strong {
+    color: var(--text-primary);
+}
+
+.bento-footer {
+    display: flex;
+    align-items: center;
+}
+
+/* Button style */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s var(--transition-curve);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .btn-primary {
+    color: #09090b;
+}
+
+.btn-primary:hover {
+    background-color: var(--text-primary);
+    color: var(--bg);
+    box-shadow: 0 8px 20px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: #fafafa;
+    color: #09090b;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 4px 12px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+.cv-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 3.5rem 0 2.5rem 0;
 }
 
 .timeline {

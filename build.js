@@ -130,8 +130,33 @@ function parseProjectFile(filePath) {
         }
     }
     
-    const bodyContent = lines.slice(bodyStartIndex).join('\n');
-    const htmlContent = processCodeBlocks(marked.parse(bodyContent));
+    // Find where Section 2 starts
+    let sec2Index = -1;
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('## 2.')) {
+            sec2Index = i;
+            break;
+        }
+    }
+    
+    let introHTML = '';
+    let detailsHTML = '';
+    
+    if (sec2Index !== -1) {
+        let introLines = lines.slice(bodyStartIndex, sec2Index);
+        // Trim trailing hr divider
+        if (introLines.length > 0 && introLines[introLines.length - 1].trim() === '---') {
+            introLines = introLines.slice(0, -1);
+        }
+        const introMarkdown = introLines.join('\n');
+        const detailsMarkdown = lines.slice(sec2Index).join('\n');
+        
+        introHTML = processCodeBlocks(marked.parse(introMarkdown));
+        detailsHTML = processCodeBlocks(marked.parse(detailsMarkdown));
+    } else {
+        const bodyContent = lines.slice(bodyStartIndex).join('\n');
+        introHTML = processCodeBlocks(marked.parse(bodyContent));
+    }
     
     return {
         title,
@@ -139,7 +164,8 @@ function parseProjectFile(filePath) {
         role,
         scope,
         compliance,
-        html: htmlContent
+        introHTML,
+        detailsHTML
     };
 }
 
@@ -247,6 +273,24 @@ function main() {
     for (let file of projectFiles) {
         const projPath = path.join(paths.projectsDir, file);
         const proj = parseProjectFile(projPath);
+        const slug = file.replace(/\.md$/, '');
+        
+        let detailsBlock = '';
+        let toggleBtn = '';
+        
+        if (proj.detailsHTML) {
+            detailsBlock = `
+            <div id="project-details-${slug}" class="project-details-expansion" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border);">
+                <div class="markdown-body">
+                    ${proj.detailsHTML}
+                </div>
+            </div>`;
+            
+            toggleBtn = `
+            <div style="margin-top: 1.5rem;">
+                <a href="javascript:void(0)" id="btn-project-${slug}" onclick="toggleProjectExpansion('${slug}')" class="btn btn-outline">Read Full Case Study &rarr;</a>
+            </div>`;
+        }
         
         projectsHTML += `
         <article class="project-card">
@@ -259,8 +303,10 @@ function main() {
                 </div>
             </div>
             <div class="markdown-body">
-                ${proj.html}
+                ${proj.introHTML}
             </div>
+            ${detailsBlock}
+            ${toggleBtn}
         </article>`;
     }
     
@@ -324,24 +370,27 @@ function main() {
                 
                 <!-- Explore Series Accordion Toggle -->
                 ${(() => {
-                    const previousEssays = seriesGroups[seriesName].slice(0, -1);
-                    if (previousEssays.length === 0) return '';
+                    const seriesEssays = seriesGroups[seriesName];
+                    if (seriesEssays.length <= 1) return '';
                     
                     let accordionHTML = `
-                    <div style="margin-top: 1.25rem;">
-                        <a href="javascript:void(0)" id="btn-explore-expand-${seriesId}" onclick="toggleSeriesExpansion('expand-${seriesId}')" class="explore-series-btn" style="font-family: var(--font-sans); font-size: 0.825rem; font-weight: 600; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.25rem; text-decoration: none;">
-                            Explore Series (${previousEssays.length} More Article${previousEssays.length > 1 ? 's' : ''}) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="javascript:void(0)" id="btn-explore-expand-${seriesId}" onclick="toggleSeriesExpansion('expand-${seriesId}')" class="explore-series-btn">
+                            Explore Series (${seriesEssays.length} Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
                         </a>
                         
-                        <div id="expand-${seriesId}" style="display: none; margin-top: 1rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">`;
+                        <div id="expand-${seriesId}" style="display: none; margin-top: 1.25rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">`;
                         
-                    for (let essay of previousEssays) {
+                    for (let essay of seriesEssays) {
                         const essaySlug = essay.filename.replace(/\.md$/, '');
+                        const isLatest = essay.filename === featuredEssay.filename;
+                        const latestBadge = isLatest ? '<span style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.1rem 0.35rem; border-radius: 4px; margin-left: 0.5rem; display: inline-block; vertical-align: middle;">Latest</span>' : '';
+                        
                         accordionHTML += `
                             <div style="font-size: 0.95rem;">
                                 <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part ${essay.seriesPart} &bull; ${essay.date}</div>
                                 <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
-                                    <a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a>
+                                    <a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a>${latestBadge}
                                 </h5>
                                 <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">${essay.excerpt}</p>
                             </div>`;
@@ -544,6 +593,7 @@ function main() {
         .replace(/{{BIO_SHORT}}/g, () => profile.about.substring(0, 150) + '...')
         .replace(/{{ABOUT_LEAD}}/g, () => aboutLead)
         .replace(/{{ABOUT_BODY}}/g, () => aboutBody)
+        .replace(/{{CV_SUMMARY}}/g, () => profile.cv_summary || profile.about)
         .replace(/{{ACKNOWLEDGEMENTS}}/g, () => acknowledgementsHTML)
         .replace(/{{PILLARS}}/g, () => pillarsHTML)
         .replace(/{{PATENT_NOTICE}}/g, () => patentNoticeHTML)
