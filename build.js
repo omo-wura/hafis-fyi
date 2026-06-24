@@ -245,9 +245,9 @@ function main() {
     
     // 2. Compile About Page Content
     const acknowledgementsHTML = marked.parse(acknowledgementsContent);
-    const aboutLead = `<p class="bio-lead">${profile.about.split('. ').slice(0, 2).join('. ') + '.'}</p>`;
-    const aboutBody = `<p>${profile.about.split('. ').slice(2).join('. ')}</p>
-    <p>Before my work in industry, I conducted research at the University of Manitoba's Renewable Energy Interface and Grid Automation Laboratory (RIGA Lab), focusing on single-stage solar micro-inverters, and served as Lead Avionics Developer for the IRIS CubeSat satellite mission.</p>`;
+    const aboutSentences = profile.about.split('. ');
+    const aboutLead = `<p class="bio-lead">${aboutSentences[0]}.</p>`;
+    const aboutBody = `<p>${aboutSentences.slice(1).join('. ')}</p>`;
     
     let pillarsHTML = '';
     for (let pillar of profile.pillars) {
@@ -615,7 +615,7 @@ function main() {
     let outputHTML = templateHTML
         .replace(/{{NAME}}/g, () => profile.name)
         .replace(/{{TITLE}}/g, () => profile.title)
-        .replace(/{{BIO_SHORT}}/g, () => profile.about.substring(0, 150) + '...')
+        .replace(/{{BIO_SHORT}}/g, () => profile.about.split('. ').slice(0, 2).join('. ') + '.')
         .replace(/{{ABOUT_LEAD}}/g, () => aboutLead)
         .replace(/{{ABOUT_BODY}}/g, () => aboutBody)
         .replace(/{{CV_SUMMARY}}/g, () => profile.cv_summary || profile.about)
