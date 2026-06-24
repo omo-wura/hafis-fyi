@@ -6,10 +6,16 @@
     <title>{{NAME}} | {{TITLE}}</title>
     <meta name="description" content="{{BIO_SHORT}}">
 
-    <!-- CSS Stylesheet (Injected at build time) -->
-    <style>
-        {{STYLES}}
-    </style>
+    <!-- CSS Stylesheet (Externalized for cacheability) -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#09090b">
+
+    <!-- Preconnect to font/CDN origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- KaTeX for beautiful math rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -206,11 +212,9 @@
             </div>
         </section>
 
-        <!-- SECTION 6: FULL ARTICLE READER -->
+        <!-- SECTION 6: FULL ARTICLE READER (lazy-loaded via fetch) -->
         <section id="article-reader-container" class="page-section" style="max-width: 850px; margin: 0 auto; padding-top: 1rem;">
-            <div id="full-article-content">
-                {{FULL_ARTICLES}}
-            </div>
+            <div id="full-article-content"></div>
         </section>
 
     </main>
@@ -259,6 +263,21 @@
                 updateToggleIcons(currentTheme);
             });
 
+            // --- Article Cache (in-memory for instant back-navigation) ---
+            const articleCache = new Map();
+
+            function activateArticleContent(container) {
+                if (window.Prism) Prism.highlightAllUnder(container);
+                if (window.renderMathInElement) {
+                    renderMathInElement(container, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ]
+                    });
+                }
+            }
+
             // --- Client-Side Router ---
             function handleRouting() {
                 let hash = window.location.hash.substring(1) || 'about';
@@ -278,28 +297,29 @@
                         reader.classList.add('active');
                     }
                     
-                    // Hide all full articles inside the container
-                    document.querySelectorAll('.full-article-page').forEach(page => {
-                        page.style.display = 'none';
-                    });
+                    const contentEl = document.getElementById('full-article-content');
                     
-                    // Show specific article
-                    const targetArticle = document.getElementById('article-' + slug);
-                    if (targetArticle) {
-                        targetArticle.style.display = 'block';
+                    // Check in-memory cache first
+                    if (articleCache.has(slug)) {
+                        contentEl.innerHTML = articleCache.get(slug);
+                        activateArticleContent(contentEl);
+                    } else {
+                        // Show loader and fetch the article fragment
+                        contentEl.innerHTML = '<div class="article-loader"><div class="loader-spinner"></div><p>Loading article...</p></div>';
                         
-                        // Highlight code blocks on demand
-                        if (window.Prism) Prism.highlightAllUnder(targetArticle);
-                        
-                        // Render LaTeX equations on demand
-                        if (window.renderMathInElement) {
-                            renderMathInElement(targetArticle, {
-                                delimiters: [
-                                    {left: '$$', right: '$$', display: true},
-                                    {left: '$', right: '$', display: false}
-                                ]
+                        fetch('articles/' + slug + '.html')
+                            .then(function(res) {
+                                if (!res.ok) throw new Error('Article not found');
+                                return res.text();
+                            })
+                            .then(function(html) {
+                                articleCache.set(slug, html);
+                                contentEl.innerHTML = html;
+                                activateArticleContent(contentEl);
+                            })
+                            .catch(function() {
+                                contentEl.innerHTML = '<p style="color: var(--text-muted); font-family: var(--font-sans); text-align: center; padding: 3rem 0;">Article not found. <a href="#writing" class="sleek-link">Back to Writing</a></p>';
                             });
-                        }
                     }
                     
                     // Deactivate active links in main menu
@@ -409,6 +429,15 @@
                 // Smooth scroll back to project card header
                 content.parentElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
+        }
+
+        // --- Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(reg) { console.log('SW registered:', reg.scope); })
+                    .catch(function(err) { console.warn('SW registration failed:', err); });
+            });
         }
     </script>
 </body>

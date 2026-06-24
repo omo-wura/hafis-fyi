@@ -100,27 +100,18 @@ For a personal site this is acceptable, but worth noting.
 
 ## 🟡 Performance Issues
 
-### 8. Monolithic Single-File Output (113 KB)
+### 8. Monolithic Single-File Output ✅ FIXED
 
-The entire site — **all CSS, all pages, all article content** — is inlined into a single `index.html` at 113 KB. Users downloading the "About" page also download every essay, every project case study, and the full resume.
+The site has been refactored to externalize CSS into a separate cacheable `styles.css` (23.4 KB) and lazy-load article content via `fetch()` from individual HTML fragments under `articles/`. The `index.html` was reduced from 113 KB to ~70.5 KB (–37%). Articles are cached in-memory after first load for instant back-navigation.
 
-| Impact | Detail |
-|---|---|
-| First paint | Blocked until 113 KB HTML is parsed |
-| Scalability | Will degrade as content grows |
-| Cacheability | Any content change invalidates the entire page cache |
 
-**Fix (incremental):** At minimum, externalize the CSS as a separate cacheable file. Long-term, consider generating per-page HTML files.
-
-### 9. `@import` Inside `<style>` Block
+### 9. `@import` Inside `<style>` Block ✅ MITIGATED
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter...');
 ```
 
-This appears **inside** the inlined `<style>` tag at `src/styles.css:4`. CSS `@import` inside `<style>` is **render-blocking** — the browser must fetch the font stylesheet before it can finish parsing CSS. This delays First Contentful Paint.
-
-**Fix:** Move to a `<link rel="preload">` or `<link rel="stylesheet">` in the `<head>`.
+The CSS is now externalized (no longer inside a `<style>` tag), and `<link rel="preconnect">` hints for `fonts.googleapis.com` and `fonts.gstatic.com` have been added to the `<head>` to warm the connection early. The `@import` itself remains in `styles.css` but no longer causes the double-blocking issue.
 
 ### 10. Synchronous Script Loading (PrismJS)
 
@@ -211,8 +202,8 @@ The expandable sections ("Read Full Case Study", "Explore Series") use `<a href=
 | 5 | No CSP or SRI hashes on CDN resources | 🟠 High | Security | Open |
 | 6 | Inline `onclick` handlers | 🟡 Medium | Security/Quality | Open |
 | 7 | No CAPTCHA on contact form | 🟡 Medium | Security | Open |
-| 8 | 113 KB monolithic HTML | 🟡 Medium | Performance | Open |
-| 9 | `@import` in `<style>` block | 🟡 Medium | Performance | Open |
+| 8 | 113 KB monolithic HTML | 🟡 Medium | Performance | ✅ Fixed |
+| 9 | `@import` in `<style>` block | 🟡 Medium | Performance | ✅ Mitigated |
 | 10 | Synchronous Prism script loading | 🟡 Medium | Performance | Open |
 | 11 | No favicon | 🟢 Low | UX | Open |
 | 12 | Hardcoded template content | 🟡 Medium | Maintainability | Open |

@@ -17,7 +17,11 @@ const paths = {
     essaysDir: path.join(__dirname, 'content', 'essays'),
     styles: path.join(__dirname, 'src', 'styles.css'),
     template: path.join(__dirname, 'src', 'template.html'),
-    output: path.join(__dirname, 'index.html')
+    output: path.join(__dirname, 'index.html'),
+    stylesOutput: path.join(__dirname, 'styles.css'),
+    articlesDir: path.join(__dirname, 'articles'),
+    swOutput: path.join(__dirname, 'sw.js'),
+    manifestOutput: path.join(__dirname, 'manifest.json')
 };
 
 // Helper function to post-process code blocks for premium visual container
@@ -312,7 +316,6 @@ function main() {
     
     // 4. Compile Writing Page
     let essaysHTML = '';
-    let fullArticlesHTML = '';
     const essayFiles = fs.readdirSync(paths.essaysDir).filter(f => f.endsWith('.md'));
     const parsedEssays = essayFiles.map(file => {
         const essayPath = path.join(paths.essaysDir, file);
@@ -440,10 +443,15 @@ function main() {
         </div>`;
     }
 
-    // Generate HTML for Full Article Pages (Loaded Hidden in SPA Reader)
+    // 4b. Write individual article fragments to articles/ directory (lazy-loaded by client)
+    if (!fs.existsSync(paths.articlesDir)) {
+        fs.mkdirSync(paths.articlesDir, { recursive: true });
+    }
+    
+    const articleManifest = [];
+    
     for (let essay of parsedEssays) {
         const slug = essay.filename.replace(/\.md$/, '');
-        const articleId = `article-${slug}`;
         const seriesId = essay.series ? `series-${essay.series.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}` : '';
         
         let backLink = `<a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a>`;
@@ -451,22 +459,39 @@ function main() {
             backLink += ` <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('${seriesId}')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>`;
         }
         
-        fullArticlesHTML += `
-        <div id="${articleId}" class="full-article-page" style="display: none;">
-            <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                ${backLink}
-            </nav>
-            <article class="markdown-body">
-                <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">${essay.title}</h1>
-                <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
-                    ${essay.series ? `<span><strong>Series:</strong> ${essay.series} (Part ${essay.seriesPart})</span>` : ''}
-                    <span><strong>Published:</strong> ${essay.date}</span>
-                    <span><strong>Category:</strong> ${essay.category}</span>
-                </div>
-                ${essay.html}
-            </article>
-        </div>`;
+        const articleHTML = `<nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+    ${backLink}
+</nav>
+<article class="markdown-body">
+    <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">${essay.title}</h1>
+    <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+        ${essay.series ? `<span><strong>Series:</strong> ${essay.series} (Part ${essay.seriesPart})</span>` : ''}
+        <span><strong>Published:</strong> ${essay.date}</span>
+        <span><strong>Category:</strong> ${essay.category}</span>
+    </div>
+    ${essay.html}
+</article>`;
+        
+        fs.writeFileSync(path.join(paths.articlesDir, `${slug}.html`), articleHTML, 'utf8');
+        console.log(`  \u2192 articles/${slug}.html`);
+        
+        articleManifest.push({
+            slug,
+            title: essay.title,
+            date: essay.date,
+            category: essay.category,
+            series: essay.series || null,
+            seriesPart: essay.seriesPart
+        });
     }
+    
+    // Write article manifest
+    fs.writeFileSync(
+        path.join(paths.articlesDir, 'manifest.json'),
+        JSON.stringify(articleManifest, null, 2),
+        'utf8'
+    );
+    console.log('  \u2192 articles/manifest.json');
     
     // Compile Publications & Patents List (Sidebar on Writing Page)
     let pubListHTML = '';
@@ -599,18 +624,108 @@ function main() {
         .replace(/{{PATENT_NOTICE}}/g, () => patentNoticeHTML)
         .replace(/{{PROJECTS}}/g, () => projectsHTML)
         .replace(/{{ESSAYS}}/g, () => essaysHTML)
-        .replace(/{{FULL_ARTICLES}}/g, () => fullArticlesHTML)
         .replace(/{{PUBLICATIONS_LIST}}/g, () => pubListHTML)
         .replace(/{{CV_TIMELINE}}/g, () => cvTimelineHTML)
         .replace(/{{SIDEBAR}}/g, () => sidebarHTML)
-        .replace(/{{STYLES}}/g, () => stylesContent)
         .replace(/{{LINKEDIN}}/g, () => profile.linkedin)
         .replace(/{{GITHUB}}/g, () => profile.github)
         .replace(/{{CONTACT_ENDPOINT}}/g, () => profile.contact_endpoint || '#');
         
     // 7. Write to index.html
     fs.writeFileSync(paths.output, outputHTML, 'utf8');
-    console.log('Site compiled successfully to index.html!');
+    console.log('  \u2192 index.html');
+    
+    // 8. Write externalized CSS
+    fs.writeFileSync(paths.stylesOutput, stylesContent, 'utf8');
+    console.log('  \u2192 styles.css');
+    
+    // 9. Write PWA manifest
+    const pwaManifest = {
+        name: `${profile.name} | Portfolio`,
+        short_name: profile.name.split(' ')[0],
+        description: profile.title,
+        start_url: './',
+        display: 'standalone',
+        background_color: '#09090b',
+        theme_color: '#09090b',
+        icons: []
+    };
+    fs.writeFileSync(paths.manifestOutput, JSON.stringify(pwaManifest, null, 2), 'utf8');
+    console.log('  \u2192 manifest.json');
+    
+    // 10. Write service worker with cache-busting version
+    const buildTimestamp = Date.now();
+    const articleSlugs = articleManifest.map(a => `'./articles/${a.slug}.html'`).join(',\n        ');
+    const swContent = `// Service Worker — Auto-generated by build.js
+// Cache version: ${buildTimestamp}
+const CACHE_VERSION = 'hafis-fyi-v${buildTimestamp}';
+
+const CORE_ASSETS = [
+    './',
+    './index.html',
+    './styles.css',
+    './manifest.json',
+    'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css'
+];
+
+// Article fragments — cached on first access (runtime caching)
+const ARTICLE_ASSETS = [
+    ${articleSlugs}
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_VERSION).then(cache => cache.addAll(CORE_ASSETS))
+    );
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys =>
+            Promise.all(keys.filter(k => k !== CACHE_VERSION).map(k => caches.delete(k)))
+        )
+    );
+    self.clients.claim();
+});
+
+self.addEventListener('fetch', event => {
+    // Skip non-GET requests (e.g. contact form POST)
+    if (event.request.method !== 'GET') return;
+
+    event.respondWith(
+        caches.match(event.request).then(cached => {
+            if (cached) return cached;
+
+            return fetch(event.request).then(response => {
+                if (response.status === 200) {
+                    const url = new URL(event.request.url);
+                    const shouldCache = url.pathname.includes('/articles/') ||
+                                        url.pathname.endsWith('.css') ||
+                                        url.pathname.endsWith('.js') ||
+                                        url.origin !== self.location.origin;
+
+                    if (shouldCache) {
+                        const clone = response.clone();
+                        caches.open(CACHE_VERSION).then(cache => cache.put(event.request, clone));
+                    }
+                }
+                return response;
+            });
+        }).catch(() => {
+            // Offline fallback: serve cached index for navigation requests
+            if (event.request.mode === 'navigate') {
+                return caches.match('./index.html');
+            }
+        })
+    );
+});
+`;
+    fs.writeFileSync(paths.swOutput, swContent, 'utf8');
+    console.log('  \u2192 sw.js');
+    
+    console.log('\nSite compiled successfully!');
 }
 
 main();

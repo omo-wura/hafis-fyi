@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "electronics-bottom-up-01",
+    "title": "Rebuilding the Foundations",
+    "date": "June 22, 2026",
+    "category": "Concepts",
+    "series": "Electronics from the Bottom Up: A First-Principles Guide",
+    "seriesPart": 1
+  },
+  {
+    "slug": "electronics-bottom-up-02",
+    "title": "The Tragedy of the Source",
+    "date": "June 29, 2026",
+    "category": "Concepts",
+    "series": "Electronics from the Bottom Up: A First-Principles Guide",
+    "seriesPart": 2
+  },
+  {
+    "slug": "electronics-bottom-up-03",
+    "title": "The Stretchy Room",
+    "date": "July 6, 2026",
+    "category": "Concepts",
+    "series": "Electronics from the Bottom Up: A First-Principles Guide",
+    "seriesPart": 3
+  },
+  {
+    "slug": "forensics-case-study-02",
+    "title": "LTspice Forensics: Tuning Closed-Loop Stability for High-Speed GaN Power Stages",
+    "date": "July 12, 2026",
+    "category": "Engineering Forensics",
+    "series": "Forensics Case Studies",
+    "seriesPart": 2
+  },
+  {
+    "slug": "igbt-desat-forensics",
+    "title": "IGBT Desaturation Forensics: Debugging False Trips under Light Load Currents",
+    "date": "June 15, 2026",
+    "category": "Engineering Forensics",
+    "series": "Forensics Case Studies",
+    "seriesPart": 1
+  }
+]

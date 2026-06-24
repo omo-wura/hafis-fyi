@@ -36,6 +36,7 @@ Add client-side interactive calculators or visualizers in Vanilla JS (e.g., an E
 
 ---
 
-## 5. Offline Support (Progressive Web App)
-* **Service Worker**: Add a basic service worker script to cache the core SPA pages, stylesheet assets, and fonts.
-* **Benefit**: Ensures the entire portfolio loads instantaneously on repeat visits, even if a reviewer is checking your site on a mobile device in an elevator, subway, or low-connectivity area.
+## 5. Offline Support (Progressive Web App) ✅ Implemented
+* **Service Worker**: A build-generated `sw.js` caches core SPA assets (HTML, CSS, manifest, CDN stylesheets) on install with a cache-first strategy. Article fragments are runtime-cached on first read. Each `npm run build` generates a fresh cache version for automatic invalidation.
+* **PWA Manifest**: `manifest.json` is auto-generated from `profile.json` with standalone display mode.
+* **Benefit**: The entire portfolio loads instantaneously on repeat visits, even offline. Previously-read articles remain available without connectivity.

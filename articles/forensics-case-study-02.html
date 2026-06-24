@@ -1,0 +1,21 @@
+<nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+    <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-forensics-case-studies')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+</nav>
+<article class="markdown-body">
+    <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">LTspice Forensics: Tuning Closed-Loop Stability for High-Speed GaN Power Stages</h1>
+    <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+        <span><strong>Series:</strong> Forensics Case Studies (Part 2)</span>
+        <span><strong>Published:</strong> July 12, 2026</span>
+        <span><strong>Category:</strong> Engineering Forensics</span>
+    </div>
+    <hr>
+<p><em>Note: This is a preview/draft entry in the series.</em></p>
+<p>In this case study, we investigate a closed-loop stability failure in a high-speed GaN converter. During load step transient testing, the converter exhibited severe voltage ringing and eventual overvoltage shutdown.</p>
+<p>We trace the issue using first-principles loop diagnostics:</p>
+<ol>
+<li><strong>Loop Gain Analysis:</strong> Simulating the converter&#39;s loop gain in LTspice and measuring it with a network analyzer.</li>
+<li><strong>Identifying the Culprit:</strong> Tracing the instability to a phase margin drop ($&lt;30^\circ$) at the crossover frequency due to parasitic board layout inductance and driver propagation delays.</li>
+<li><strong>The Fix:</strong> Redesigning the digital compensator by adding high-frequency poles to boost the phase margin to a stable $55^\circ$.</li>
+</ol>
+
+</article>
