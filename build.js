@@ -245,9 +245,9 @@ function main() {
     
     // 2. Compile About Page Content
     const acknowledgementsHTML = marked.parse(acknowledgementsContent);
-    const aboutSentences = profile.about.split('. ');
-    const aboutLead = `<p class="bio-lead">${aboutSentences[0]}.</p>`;
-    const aboutBody = `<p>${aboutSentences.slice(1).join('. ')}</p>`;
+    const aboutParagraphs = profile.about.split('\n\n').filter(p => p.trim());
+    const aboutLead = `<p class="bio-lead">${aboutParagraphs[0]}</p>`;
+    const aboutBody = aboutParagraphs.slice(1).map(p => `<p>${p}</p>`).join('\n    ');
     
     let pillarsHTML = '';
     for (let pillar of profile.pillars) {
@@ -615,7 +615,7 @@ function main() {
     let outputHTML = templateHTML
         .replace(/{{NAME}}/g, () => profile.name)
         .replace(/{{TITLE}}/g, () => profile.title)
-        .replace(/{{BIO_SHORT}}/g, () => profile.about.split('. ').slice(0, 2).join('. ') + '.')
+        .replace(/{{BIO_SHORT}}/g, () => profile.about.split('\n\n').filter(p => p.trim()).slice(0, 2).join(' '))
         .replace(/{{ABOUT_LEAD}}/g, () => aboutLead)
         .replace(/{{ABOUT_BODY}}/g, () => aboutBody)
         .replace(/{{CV_SUMMARY}}/g, () => profile.cv_summary || profile.about)

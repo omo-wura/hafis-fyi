@@ -7,20 +7,20 @@
         "contact_endpoint": "https://formspree.io/f/your_formspree_id",
         "linkedin": "https://www.linkedin.com/in/hafis-u-33a31796/",
         "github": "https://github.com/omo-wura",
-        "about": "I design, debug, and govern the power electronics that connect solar panels to homes, batteries to grids, and satellites to space. Over 5+ years in industry, I have been the primary hardware designer on 25+ PCB designs across 6 commercial products at dcbel and GBatteries — spanning residential microgrids, high-speed GaN battery cyclers, and module-level solar optimizers. I take boards from initial schematic capture through multi-layer layout, prototype bring-up, failure forensics, safety certification (UL 1741, FCC Part 15), and manufacturing handover. Certified TÜV SÜD Functional Safety Engineer.",
+        "about": "I design and debug the power electronics and hardware that connect solar panels to homes, batteries to grids, and empower satellite missions in low Earth orbit.\n\nOver the past decade, I have developed complex hardware across dcbel, GBatteries, and academia, producing over 25 PCBs. I have been the lead designer for two fully industrialized products and taken complete ownership of critical, standalone subsystems within product platforms. My work spans both commercial markets and internal R&D—from residential microgrid platforms and module-level solar optimizers to specialized, high-bandwidth GaN battery cyclers. I am a certified TÜV SÜD Functional Safety Engineer, and thrive on guiding my hardware from concept through schematic capture, board layout, prototype bring-up, failure forensics, regulatory certification (UL, FCC, IEC), and manufacturing handover.\n\nBefore my work in industry, I conducted research on single-stage solar micro-inverters at the University of Manitoba's Renewable Energy Interface and Grid Automation (RIGA) Lab. Concurrently, through the university's Space Technologies and Advanced Research (STAR) Lab, I served as the Lead Avionics Developer for the IRIS CubeSat—a nanosatellite mission developed as part of the Canadian Space Agency’s Canadian CubeSat Project.",
         "cv_summary": "Hardware engineer delivering high-density power converters from concept through safety certification and manufacturing handover. Core focus areas: bidirectional converter design (up to 14kW), first-principles failure forensics, and PLM/CAD governance. Certified TÜV SÜD Functional Safety Engineer.",
         "pillars": [
             {
                 "title": "Power Conversion Stage Design",
-                "description": "Design of bidirectional high-density converters (up to 14kW, including GaN stages at 500kHz), active precharge loops, relay coil economization, and integrated magnetic cores."
+                "description": "Designing bidirectional high-density converters (up to 800V, 14kW class, GaN power stages to 500kHz), managing critical clearance and creepage, and engineering core sub-circuits including precharge loops, relay economization, DESAT protection, and tight layout loops."
             },
             {
                 "title": "Failure Analysis & Diagnostics (Forensics)",
-                "description": "Applying first-principles physical analysis to debug transient anomalies, IGBT desaturation dynamics, closed-loop instability, and EMI/EMC issues (UL 1741, UL 60730, FCC Part 15)."
+                "description": "Applying first-principles physics to debug transient anomalies across multi-board assemblies, systematically narrowing the solution space to resolve complex root causes ranging from false desaturation detection, charge pump starvation, and relay dropout, to EMI/EMC compliance issues."
             },
             {
-                "title": "Operational Governance & CAD Management",
-                "description": "Managing CAD component library databases (Altium 365 DBLib), component template parameters, and gatekeeping release pipelines via ECO workflows in PLM software (Arena)."
+                "title": "Operational Coordination & CAD Management",
+                "description": "Managing CAD component library databases (Altium 365 DBLib), establishing component and schematic templates, and gatekeeping electronics release pipelines via ECO workflows in PLM software (Arena)."
             }
         ],
         "languages": [

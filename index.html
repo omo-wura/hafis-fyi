@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hafis Umar-Lawal | Power Electronics & Hardware Engineer</title>
-    <meta name="description" content="I design, debug, and govern the power electronics that connect solar panels to homes, batteries to grids, and satellites to space. Over 5+ years in industry, I have been the primary hardware designer on 25+ PCB designs across 6 commercial products at dcbel and GBatteries — spanning residential microgrids, high-speed GaN battery cyclers, and module-level solar optimizers.">
+    <meta name="description" content="I design and debug the power electronics and hardware that connect solar panels to homes, batteries to grids, and empower satellite missions in low Earth orbit. Over the past decade, I have developed complex hardware across dcbel, GBatteries, and academia, producing over 25 PCBs. I have been the lead designer for two fully industrialized products and taken complete ownership of critical, standalone subsystems within product platforms. My work spans both commercial markets and internal R&D—from residential microgrid platforms and module-level solar optimizers to specialized, high-bandwidth GaN battery cyclers. I am a certified TÜV SÜD Functional Safety Engineer, and thrive on guiding my hardware from concept through schematic capture, board layout, prototype bring-up, failure forensics, regulatory certification (UL, FCC, IEC), and manufacturing handover.">
 
     <!-- CSS Stylesheet (Externalized for cacheability) -->
     <link rel="stylesheet" href="styles.css">
@@ -72,36 +72,51 @@
     <main class="main-content">
 
         <!-- SECTION 1: ABOUT -->
-        <section id="page-about" class="page-section active">
+        <section id="page-about" class="page-section active" style="position: relative;">
+            
+            <!-- Photo in the outer left gutter (Visible on large screens) -->
+            <style>
+                .outer-gutter-photo { display: none; }
+                @media (min-width: 1400px) {
+                    .outer-gutter-photo {
+                        display: block;
+                        position: absolute;
+                        right: calc(100% + 3rem); /* Push it 3rem outside the main content */
+                        top: 3.5rem; /* Aligns with the bio text, below the section title */
+                        width: 180px;
+                        border-radius: 8px;
+                        background: var(--accent-light);
+                        border: 2px solid var(--border);
+                        overflow: hidden;
+                    }
+                }
+            </style>
+            <div class="outer-gutter-photo">
+                <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal" style="width: 100%; display: block;">
+            </div>
+
             <div class="grid-layout">
                 <div>
                     <h2 class="section-title">Overview</h2>
-                    <!-- Headshot placeholder — replace src with actual photo when available -->
-                    <div class="bio-headshot-placeholder" style="width: 120px; height: 120px; border-radius: 50%; background: var(--accent-light); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
                     <div class="bio-lead">
-                        <p class="bio-lead">I design, debug, and govern the power electronics that connect solar panels to homes, batteries to grids, and satellites to space.</p>
+                        <p class="bio-lead">I design and debug the power electronics and hardware that connect solar panels to homes, batteries to grids, and empower satellite missions in low Earth orbit.</p>
                     </div>
                     <div class="bio-body">
-                        <p>Over 5+ years in industry, I have been the primary hardware designer on 25+ PCB designs across 6 commercial products at dcbel and GBatteries — spanning residential microgrids, high-speed GaN battery cyclers, and module-level solar optimizers. I take boards from initial schematic capture through multi-layer layout, prototype bring-up, failure forensics, safety certification (UL 1741, FCC Part 15), and manufacturing handover. Certified TÜV SÜD Functional Safety Engineer.</p>
+                        <p>Over the past decade, I have developed complex hardware across dcbel, GBatteries, and academia, producing over 25 PCBs. I have been the lead designer for two fully industrialized products and taken complete ownership of critical, standalone subsystems within product platforms. My work spans both commercial markets and internal R&D—from residential microgrid platforms and module-level solar optimizers to specialized, high-bandwidth GaN battery cyclers. I am a certified TÜV SÜD Functional Safety Engineer, and thrive on guiding my hardware from concept through schematic capture, board layout, prototype bring-up, failure forensics, regulatory certification (UL, FCC, IEC), and manufacturing handover.</p>
+    <p>Before my work in industry, I conducted research on single-stage solar micro-inverters at the University of Manitoba's Renewable Energy Interface and Grid Automation (RIGA) Lab. Concurrently, through the university's Space Technologies and Advanced Research (STAR) Lab, I served as the Lead Avionics Developer for the IRIS CubeSat—a nanosatellite mission developed as part of the Canadian Space Agency’s Canadian CubeSat Project.</p>
                     </div>
                     <div class="acknowledgements-section" style="margin-top: 3rem;">
                         <h2 class="section-title">Acknowledgements</h2>
                         <div class="markdown-body" style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);">
-                            <h1>Mentorship &amp; Collaborations</h1>
-<p>My journey in power electronics and space systems engineering has been shaped by the guidance, support, and collaboration of exceptional mentors, advisors, and colleagues. I would like to acknowledge:</p>
+                            <p>My journey through power electronics and space systems engineering has been shaped by the guidance, support, and collaboration of exceptional mentors, advisors, and colleagues. I would like to acknowledge:</p>
 <ul>
-<li><p><strong>Dr. Carl Ho &amp; The RIGA Lab Team</strong> (University of Manitoba)<br>For the invaluable academic mentorship, theoretical training, and hands-on laboratory guidance in grid-tied solar micro-inverter topologies and integrated magnetics research.</p>
+<li><p><strong>Dr. Carl Ho &amp; The RIGA Lab Team</strong> (University of Manitoba)<br>For life-changing academic mentorship, theoretical training, hands-on laboratory guidance in fundamental power electronics R&amp;D, and an early introduction to a career I love dearly.</p>
 </li>
-<li><p><strong>The IRIS CubeSat Avionics Team &amp; STAR Lab</strong><br>For the incredible team camaraderie and peer support during the design, layout, and rigorous Canadian Space Agency (CSA) reviews of our nanosatellite flight systems.</p>
+<li><p><strong>Dr. Philip Ferguson, the IRIS CubeSat Avionics Team &amp; STAR Lab</strong><br>For priceless mentorship, an incredible space 101 initiation, team camaraderie and peer support during the design and rigorous Canadian Space Agency (CSA) review cycles of our IRIS CubeSat systems.</p>
 </li>
-<li><p><strong>The Engineering Team at GBatteries</strong><br>For the collaboration, challenging problems, and shared learning during the development and stability analysis of our high-speed, high-density GaN battery cycler power stages.</p>
+<li><p><strong>Alex Tkachenko &amp; The Hardware Engineering Team at GBatteries</strong><br>For setting the trajectory of my industrial career, and for the countless lessons learned while pushing to achieve seemingly contradictory high-bandwidth and low-ripple performance on our battery cyclers.</p>
 </li>
-<li><p><strong>The Power &amp; Hardware Teams at dcbel</strong><br>For the outstanding partnership in designing bidirectional home microgrid systems, co-inventing safety/optimizer controls, and establishing unified, multi-engineer CAD library standards.</p>
+<li><p><strong>Ernest Montllo &amp; The Power &amp; Hardware Teams at dcbel</strong><br>For the experience of a passionate engineering culture, for the thrill of co-inventing together, and for raising my standards in designing high-voltage, high-density power systems without compromising functional safety.</p>
 </li>
 </ul>
 
@@ -114,15 +129,15 @@
                         
         <div class="pillar-card">
             <h3>Power Conversion Stage Design</h3>
-            <p>Design of bidirectional high-density converters (up to 14kW, including GaN stages at 500kHz), active precharge loops, relay coil economization, and integrated magnetic cores.</p>
+            <p>Designing bidirectional high-density converters (up to 800V, 14kW class, GaN power stages to 500kHz), managing critical clearance and creepage, and engineering core sub-circuits including precharge loops, relay economization, DESAT protection, and tight layout loops.</p>
         </div>
         <div class="pillar-card">
             <h3>Failure Analysis & Diagnostics (Forensics)</h3>
-            <p>Applying first-principles physical analysis to debug transient anomalies, IGBT desaturation dynamics, closed-loop instability, and EMI/EMC issues (UL 1741, UL 60730, FCC Part 15).</p>
+            <p>Applying first-principles physics to debug transient anomalies across multi-board assemblies, systematically narrowing the solution space to resolve complex root causes ranging from false desaturation detection, charge pump starvation, and relay dropout, to EMI/EMC compliance issues.</p>
         </div>
         <div class="pillar-card">
-            <h3>Operational Governance & CAD Management</h3>
-            <p>Managing CAD component library databases (Altium 365 DBLib), component template parameters, and gatekeeping release pipelines via ECO workflows in PLM software (Arena).</p>
+            <h3>Operational Coordination & CAD Management</h3>
+            <p>Managing CAD component library databases (Altium 365 DBLib), establishing component and schematic templates, and gatekeeping electronics release pipelines via ECO workflows in PLM software (Arena).</p>
         </div>
                     </div>
                     

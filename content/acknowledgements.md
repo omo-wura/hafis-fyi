@@ -1,15 +1,13 @@
-# Mentorship & Collaborations
-
-My journey in power electronics and space systems engineering has been shaped by the guidance, support, and collaboration of exceptional mentors, advisors, and colleagues. I would like to acknowledge:
+My journey through power electronics and space systems engineering has been shaped by the guidance, support, and collaboration of exceptional mentors, advisors, and colleagues. I would like to acknowledge:
 
 - **Dr. Carl Ho & The RIGA Lab Team** (University of Manitoba)
-  For the invaluable academic mentorship, theoretical training, and hands-on laboratory guidance in grid-tied solar micro-inverter topologies and integrated magnetics research.
+  For life-changing academic mentorship, theoretical training, hands-on laboratory guidance in fundamental power electronics R&D, and an early introduction to a career I love dearly.
 
-- **The IRIS CubeSat Avionics Team & STAR Lab**
-  For the incredible team camaraderie and peer support during the design, layout, and rigorous Canadian Space Agency (CSA) reviews of our nanosatellite flight systems.
+- **Dr. Philip Ferguson, the IRIS CubeSat Avionics Team & STAR Lab**
+  For priceless mentorship, an incredible space 101 initiation, team camaraderie and peer support during the design and rigorous Canadian Space Agency (CSA) review cycles of our IRIS CubeSat systems.
 
-- **The Engineering Team at GBatteries**
-  For the collaboration, challenging problems, and shared learning during the development and stability analysis of our high-speed, high-density GaN battery cycler power stages.
+- **Alex Tkachenko & The Hardware Engineering Team at GBatteries**
+  For setting the trajectory of my industrial career, and for the countless lessons learned while pushing to achieve seemingly contradictory high-bandwidth and low-ripple performance on our battery cyclers.
 
-- **The Power & Hardware Teams at dcbel**
-  For the outstanding partnership in designing bidirectional home microgrid systems, co-inventing safety/optimizer controls, and establishing unified, multi-engineer CAD library standards.
+- **Ernest Montllo & The Power & Hardware Teams at dcbel**
+  For the experience of a passionate engineering culture, for the thrill of co-inventing together, and for raising my standards in designing high-voltage, high-density power systems without compromising functional safety.

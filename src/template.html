@@ -72,17 +72,32 @@
     <main class="main-content">
 
         <!-- SECTION 1: ABOUT -->
-        <section id="page-about" class="page-section active">
+        <section id="page-about" class="page-section active" style="position: relative;">
+            
+            <!-- Photo in the outer left gutter (Visible on large screens) -->
+            <style>
+                .outer-gutter-photo { display: none; }
+                @media (min-width: 1400px) {
+                    .outer-gutter-photo {
+                        display: block;
+                        position: absolute;
+                        right: calc(100% + 3rem); /* Push it 3rem outside the main content */
+                        top: 3.5rem; /* Aligns with the bio text, below the section title */
+                        width: 180px;
+                        border-radius: 8px;
+                        background: var(--accent-light);
+                        border: 2px solid var(--border);
+                        overflow: hidden;
+                    }
+                }
+            </style>
+            <div class="outer-gutter-photo">
+                <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal" style="width: 100%; display: block;">
+            </div>
+
             <div class="grid-layout">
                 <div>
                     <h2 class="section-title">Overview</h2>
-                    <!-- Headshot placeholder — replace src with actual photo when available -->
-                    <div class="bio-headshot-placeholder" style="width: 120px; height: 120px; border-radius: 50%; background: var(--accent-light); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
                     <div class="bio-lead">
                         {{ABOUT_LEAD}}
                     </div>
