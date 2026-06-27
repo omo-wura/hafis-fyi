@@ -74,36 +74,20 @@
         <!-- SECTION 1: ABOUT -->
         <section id="page-about" class="page-section active" style="position: relative;">
             
-            <!-- Photo in the outer left gutter (Visible on large screens) -->
-            <style>
-                .outer-gutter-photo { display: none; }
-                @media (min-width: 1400px) {
-                    .outer-gutter-photo {
-                        display: block;
-                        position: absolute;
-                        right: calc(100% + 3rem); /* Push it 3rem outside the main content */
-                        top: 3.5rem; /* Aligns with the bio text, below the section title */
-                        width: 180px;
-                        border-radius: 8px;
-                        background: var(--accent-light);
-                        border: 2px solid var(--border);
-                        overflow: hidden;
-                    }
-                }
-            </style>
-            <div class="outer-gutter-photo">
-                <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal" style="width: 100%; display: block;">
-            </div>
-
             <div class="grid-layout">
                 <div>
                     <h2 class="section-title">Overview</h2>
-                    <div class="bio-lead">
-                        <p class="bio-lead">I design and debug the power electronics and hardware that connect solar panels to homes, batteries to grids, and empower satellite missions in low Earth orbit.</p>
-                    </div>
-                    <div class="bio-body">
-                        <p>Over the past decade, I have developed complex hardware across dcbel, GBatteries, and academia, producing over 25 PCBs. I have been the lead designer for two fully industrialized products and taken complete ownership of critical, standalone subsystems within product platforms. My work spans both commercial markets and internal R&D—from residential microgrid platforms and module-level solar optimizers to specialized, high-bandwidth GaN battery cyclers. I am a certified TÜV SÜD Functional Safety Engineer, and thrive on guiding my hardware from concept through schematic capture, board layout, prototype bring-up, failure forensics, regulatory certification (UL, FCC, IEC), and manufacturing handover.</p>
+                    <div class="bio-container">
+                        <div class="profile-photo">
+                            <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal">
+                        </div>
+                        <div class="bio-lead">
+                            <p class="bio-lead">I design and debug the power electronics and hardware that connect solar panels to homes, batteries to grids, and empower satellite missions in low Earth orbit.</p>
+                        </div>
+                        <div class="bio-body">
+                            <p>Over the past decade, I have developed complex hardware across dcbel, GBatteries, and academia, producing over 25 PCBs. I have been the lead designer for two fully industrialized products and taken complete ownership of critical, standalone subsystems within product platforms. My work spans both commercial markets and internal R&D—from residential microgrid platforms and module-level solar optimizers to specialized, high-bandwidth GaN battery cyclers. I am a certified TÜV SÜD Functional Safety Engineer, and thrive on guiding my hardware from concept through schematic capture, board layout, prototype bring-up, failure forensics, regulatory certification (UL, FCC, IEC), and manufacturing handover.</p>
     <p>Before my work in industry, I conducted research on single-stage solar micro-inverters at the University of Manitoba's Renewable Energy Interface and Grid Automation (RIGA) Lab. Concurrently, through the university's Space Technologies and Advanced Research (STAR) Lab, I served as the Lead Avionics Developer for the IRIS CubeSat—a nanosatellite mission developed as part of the Canadian Space Agency’s Canadian CubeSat Project.</p>
+                        </div>
                     </div>
                     <div class="acknowledgements-section" style="margin-top: 3rem;">
                         <h2 class="section-title">Acknowledgements</h2>

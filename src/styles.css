@@ -1164,3 +1164,73 @@ textarea.form-control {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* Responsive Profile Photo & Bio container */
+.bio-container {
+    display: flow-root;
+}
+
+.profile-photo {
+    width: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 8px;
+    background: var(--accent-light);
+    border: 2px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--transition-curve);
+}
+
+.profile-photo img {
+    width: 100%;
+    display: block;
+}
+
+@media (min-width: 992px) and (max-width: 1365px) {
+    .profile-photo {
+        float: right;
+        margin-left: 2.5rem;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+        width: 180px;
+        box-shadow: var(--shadow-md);
+    }
+}
+
+@media (min-width: 1366px) {
+    .bio-container {
+        position: relative;
+    }
+
+    .profile-photo {
+        float: none;
+        position: absolute;
+        top: 0.2rem; /* Aligns exactly with the first line of the bio lead text */
+        margin: 0;
+        box-shadow: var(--shadow-md);
+    }
+}
+
+/* Step 1: Laptop viewports - scale down photo and gutter gap to fit the margins */
+@media (min-width: 1366px) and (max-width: 1440px) {
+    .profile-photo {
+        width: 130px;
+        right: calc(100% + 1.5rem);
+    }
+}
+
+/* Step 2: Medium/Large laptop viewports - slightly larger photo and gap */
+@media (min-width: 1441px) and (max-width: 1550px) {
+    .profile-photo {
+        width: 150px;
+        right: calc(100% + 2rem);
+    }
+}
+
+/* Step 3: Desktop monitors - full size photo and gutter gap */
+@media (min-width: 1551px) {
+    .profile-photo {
+        width: 180px;
+        right: calc(100% + 3rem);
+    }
+}

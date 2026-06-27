@@ -74,35 +74,19 @@
         <!-- SECTION 1: ABOUT -->
         <section id="page-about" class="page-section active" style="position: relative;">
             
-            <!-- Photo in the outer left gutter (Visible on large screens) -->
-            <style>
-                .outer-gutter-photo { display: none; }
-                @media (min-width: 1400px) {
-                    .outer-gutter-photo {
-                        display: block;
-                        position: absolute;
-                        right: calc(100% + 3rem); /* Push it 3rem outside the main content */
-                        top: 3.5rem; /* Aligns with the bio text, below the section title */
-                        width: 180px;
-                        border-radius: 8px;
-                        background: var(--accent-light);
-                        border: 2px solid var(--border);
-                        overflow: hidden;
-                    }
-                }
-            </style>
-            <div class="outer-gutter-photo">
-                <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal" style="width: 100%; display: block;">
-            </div>
-
             <div class="grid-layout">
                 <div>
                     <h2 class="section-title">Overview</h2>
-                    <div class="bio-lead">
-                        {{ABOUT_LEAD}}
-                    </div>
-                    <div class="bio-body">
-                        {{ABOUT_BODY}}
+                    <div class="bio-container">
+                        <div class="profile-photo">
+                            <img src="assets/5_resized.jpg" alt="Hafis Umar-Lawal">
+                        </div>
+                        <div class="bio-lead">
+                            {{ABOUT_LEAD}}
+                        </div>
+                        <div class="bio-body">
+                            {{ABOUT_BODY}}
+                        </div>
                     </div>
                     <div class="acknowledgements-section" style="margin-top: 3rem;">
                         <h2 class="section-title">Acknowledgements</h2>
