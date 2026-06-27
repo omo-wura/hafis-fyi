@@ -322,58 +322,84 @@ function main() {
     
     // 4. Compile Writing Page
     let essaysHTML = '';
-    const essayFiles = fs.readdirSync(paths.essaysDir).filter(f => f.endsWith('.md'));
-    const parsedEssays = essayFiles.map(file => {
-        const essayPath = path.join(paths.essaysDir, file);
-        return {
-            ...parseEssayFile(essayPath),
-            filename: file
-        };
-    });
-
     const seriesGroups = {};
     const standaloneArticles = [];
-
-    for (let essay of parsedEssays) {
-        if (essay.series) {
-            if (!seriesGroups[essay.series]) {
-                seriesGroups[essay.series] = [];
+    const seriesMetadata = {};
+    const parsedEssays = [];
+    
+    const essayEntries = fs.readdirSync(paths.essaysDir, { withFileTypes: true });
+    
+    for (const entry of essayEntries) {
+        if (entry.isDirectory()) {
+            const seriesDir = entry.name;
+            const seriesPath = path.join(paths.essaysDir, seriesDir);
+            seriesGroups[seriesDir] = [];
+            
+            const metadataPath = path.join(seriesPath, '_series.md');
+            if (fs.existsSync(metadataPath)) {
+                // Parse _series.md using parseEssayFile (it captures frontmatter and body)
+                const metadata = parseEssayFile(metadataPath);
+                seriesMetadata[seriesDir] = {
+                    title: metadata.title || seriesDir,
+                    excerpt: metadata.excerpt || '',
+                    preamble: metadata.html || '' // HTML body is the preamble
+                };
+            } else {
+                seriesMetadata[seriesDir] = { title: seriesDir, excerpt: '', preamble: '' };
             }
-            seriesGroups[essay.series].push(essay);
-        } else {
-            standaloneArticles.push(essay);
+            
+            const articleFiles = fs.readdirSync(seriesPath).filter(f => f.endsWith('.md') && f !== '_series.md');
+            for (const file of articleFiles) {
+                const essayPath = path.join(seriesPath, file);
+                const essayData = parseEssayFile(essayPath);
+                essayData.seriesDir = seriesDir;
+                essayData.series = seriesMetadata[seriesDir].title;
+                essayData.filename = file;
+                essayData.slug = file.replace(/\.md$/, '');
+                seriesGroups[seriesDir].push(essayData);
+                parsedEssays.push(essayData);
+            }
+        } else if (entry.isFile() && entry.name.endsWith('.md')) {
+            const essayPath = path.join(paths.essaysDir, entry.name);
+            const essayData = parseEssayFile(essayPath);
+            essayData.filename = entry.name;
+            essayData.slug = entry.name.replace(/\.md$/, '');
+            standaloneArticles.push(essayData);
+            parsedEssays.push(essayData);
         }
     }
 
-    // Generate HTML for Series Groups (Index Listing with Accordion)
+    // Ensure articles/ directory exists
+    if (!fs.existsSync(paths.articlesDir)) {
+        fs.mkdirSync(paths.articlesDir, { recursive: true });
+    }
+
+    // Generate HTML for Series Groups
     let hasSeries = Object.keys(seriesGroups).length > 0;
     if (hasSeries) {
         essaysHTML += `
-        <h2 class="section-title">Series & Deep Dives</h2>
+        <h2 class="section-title" style="margin-bottom: 0.75rem;">Series & Deep Dives</h2>
         `;
     }
 
-    for (let seriesName in seriesGroups) {
-        // Sort by seriesPart ascending to find order
-        seriesGroups[seriesName].sort((a, b) => (a.seriesPart || 0) - (b.seriesPart || 0));
+    for (let seriesDir in seriesGroups) {
+        seriesGroups[seriesDir].sort((a, b) => (a.seriesPart || 0) - (b.seriesPart || 0));
         
-        // Featured essay is the latest in the series (highest part number)
-        const featuredEssay = seriesGroups[seriesName][seriesGroups[seriesName].length - 1];
-        const featuredSlug = featuredEssay.filename.replace(/\.md$/, '');
-        const seriesId = `series-${seriesName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+        const seriesId = `series-${seriesDir.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+        const meta = seriesMetadata[seriesDir];
         
         essaysHTML += `
-        <div id="${seriesId}" class="series-container" style="margin-bottom: 2rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                <span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span>
-                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">${seriesName}</h3>
+        <div id="${seriesId}" class="series-container" style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                <span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px; margin-top: 0.25rem;">Series</span>
+                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0; line-height: 1.3;">${meta.title}</h3>
             </div>
             
             <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
                 <p class="essay-excerpt" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    ${seriesGroups[seriesName][0].excerpt || 'Explore the complete series.'}
+                    ${meta.excerpt || 'Explore the complete series.'}
                 </p>
-                <a href="#writing/${seriesId}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Explore Series (${seriesGroups[seriesName].length} Articles) &rarr;</a>
+                <a href="#writing/${seriesId}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Explore Series (${seriesGroups[seriesDir].length} Articles) &rarr;</a>
             </div>
         </div>`;
         
@@ -382,20 +408,21 @@ function main() {
         <div class="article-header" style="margin-bottom: 2.5rem;">
             <a href="#writing" class="sleek-link" style="font-size: 0.85rem; font-family: var(--font-sans); font-weight: 700; color: var(--text-muted); display: inline-block; margin-bottom: 1.5rem;">&larr; Back to Writing</a>
             <div style="margin-bottom: 1rem;"><span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span></div>
-            <h1 class="article-title" style="margin-bottom: 1rem; font-size: 2.2rem; font-weight: 800;">${seriesName}</h1>
-            <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7;">${seriesGroups[seriesName][0].excerpt}</p>
+            <h1 class="article-title" style="margin-bottom: 1rem; font-size: 2.2rem; font-weight: 800;">${meta.title}</h1>
+            <div class="markdown-body" style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem;">
+                ${meta.preamble}
+            </div>
         </div>
         <div class="article-body">
             <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; font-family: var(--font-sans); font-weight: 700;">Articles in this Series</h3>
             <div style="display: flex; flex-direction: column; gap: 2rem;">
         `;
         
-        for (let essay of seriesGroups[seriesName]) {
-            const essaySlug = essay.filename.replace(/\.md$/, '');
+        for (let essay of seriesGroups[seriesDir]) {
             seriesPageHTML += `
                 <div style="padding-left: 1rem; border-left: 3px solid var(--border);">
                     <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.35rem;">Part ${essay.seriesPart} &bull; ${essay.date}</div>
-                    <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;"><a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a></h4>
+                    <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;"><a href="#writing/${essay.slug}" class="sleek-link">${essay.title}</a></h4>
                     <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">${essay.excerpt}</p>
                 </div>
             `;
@@ -415,16 +442,16 @@ function main() {
         standaloneArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         essaysHTML += `
-        <h2 class="section-title" style="margin-top: 2rem;">Standalone Notes</h2>
+        <h2 class="section-title" style="margin-top: 1rem; margin-bottom: 0.75rem;">Standalone Notes</h2>
         `;
         
         for (let essay of standaloneArticles) {
             const essaySlug = essay.filename.replace(/\.md$/, '');
             essaysHTML += `
-        <div class="series-container" style="margin-bottom: 2rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                <span class="skill-tag" style="background: var(--bg-offset); color: var(--text-secondary); border-color: var(--border); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Note</span>
-                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">${essay.title}</h3>
+        <div class="series-container" style="margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                <span class="skill-tag" style="background: var(--bg-card); color: var(--text-primary); border-color: var(--text-secondary); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px; margin-top: 0.25rem;">Note</span>
+                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0; line-height: 1.3;">${essay.title}</h3>
             </div>
             
             <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
@@ -438,15 +465,12 @@ function main() {
     }
 
     // 4b. Write individual article fragments to articles/ directory (lazy-loaded by client)
-    if (!fs.existsSync(paths.articlesDir)) {
-        fs.mkdirSync(paths.articlesDir, { recursive: true });
-    }
     
     const articleManifest = [];
     
     for (let essay of parsedEssays) {
         const slug = essay.filename.replace(/\.md$/, '');
-        const seriesId = essay.series ? `series-${essay.series.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}` : '';
+        const seriesId = essay.seriesDir ? `series-${essay.seriesDir.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}` : '';
         
         let backLink = `<a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a>`;
         if (essay.series) {
