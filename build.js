@@ -128,7 +128,10 @@ function parseProjectFile(filePath) {
     
     let bodyStartIndex = 0;
     for (let i = 0; i < lines.length; i++) {
-        if (lines[i].startsWith('---') || lines[i].startsWith('##')) {
+        if (lines[i].startsWith('---')) {
+            bodyStartIndex = i + 1;
+            break;
+        } else if (lines[i].startsWith('##')) {
             bodyStartIndex = i;
             break;
         }
@@ -211,7 +214,10 @@ function parseEssayFile(filePath) {
     
     let bodyStartIndex = 0;
     for (let i = 0; i < lines.length; i++) {
-        if (lines[i].startsWith('---') || lines[i].startsWith('##')) {
+        if (lines[i].startsWith('---')) {
+            bodyStartIndex = i + 1;
+            break;
+        } else if (lines[i].startsWith('##')) {
             bodyStartIndex = i;
             break;
         }
@@ -340,6 +346,13 @@ function main() {
     }
 
     // Generate HTML for Series Groups (Index Listing with Accordion)
+    let hasSeries = Object.keys(seriesGroups).length > 0;
+    if (hasSeries) {
+        essaysHTML += `
+        <h2 class="section-title">Series & Deep Dives</h2>
+        `;
+    }
+
     for (let seriesName in seriesGroups) {
         // Sort by seriesPart ascending to find order
         seriesGroups[seriesName].sort((a, b) => (a.seriesPart || 0) - (b.seriesPart || 0));
@@ -350,63 +363,51 @@ function main() {
         const seriesId = `series-${seriesName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
         
         essaysHTML += `
-        <div id="${seriesId}" class="series-container" style="margin-bottom: 3.5rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        <div id="${seriesId}" class="series-container" style="margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
                 <span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span>
                 <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">${seriesName}</h3>
             </div>
             
-            <!-- Featured Latest Post -->
             <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
-                <div style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Latest Entry &bull; Part ${featuredEssay.seriesPart}</div>
-                <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">
-                    <a href="#writing/${featuredSlug}" class="sleek-link">${featuredEssay.title}</a>
-                </h4>
-                <div class="essay-meta" style="margin-bottom: 0.75rem; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; gap: 1rem;">
-                    <span>Published: ${featuredEssay.date}</span>
-                    <span>Category: ${featuredEssay.category}</span>
-                </div>
                 <p class="essay-excerpt" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                    ${featuredEssay.excerpt}
+                    ${seriesGroups[seriesName][0].excerpt || 'Explore the complete series.'}
                 </p>
-                <a href="#writing/${featuredSlug}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Read Full Article &rarr;</a>
-                
-                <!-- Explore Series Accordion Toggle -->
-                ${(() => {
-                    const seriesEssays = seriesGroups[seriesName];
-                    if (seriesEssays.length <= 1) return '';
-                    
-                    let accordionHTML = `
-                    <div style="margin-top: 1.5rem;">
-                        <a href="javascript:void(0)" id="btn-explore-expand-${seriesId}" onclick="toggleSeriesExpansion('expand-${seriesId}')" class="explore-series-btn">
-                            Explore Series (${seriesEssays.length} Articles) <span class="arrow" style="display: inline-block; font-size: 0.65rem; transition: transform 0.2s;">&#9662;</span>
-                        </a>
-                        
-                        <div id="expand-${seriesId}" style="display: none; margin-top: 1.25rem; padding-left: 1.25rem; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 1.25rem;">`;
-                        
-                    for (let essay of seriesEssays) {
-                        const essaySlug = essay.filename.replace(/\.md$/, '');
-                        const isLatest = essay.filename === featuredEssay.filename;
-                        const latestBadge = isLatest ? '<span style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.1rem 0.35rem; border-radius: 4px; margin-left: 0.5rem; display: inline-block; vertical-align: middle;">Latest</span>' : '';
-                        
-                        accordionHTML += `
-                            <div style="font-size: 0.95rem;">
-                                <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.15rem;">Part ${essay.seriesPart} &bull; ${essay.date}</div>
-                                <h5 style="font-family: var(--font-sans); font-size: 0.975rem; font-weight: 700; margin-bottom: 0.15rem; line-height: 1.3;">
-                                    <a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a>${latestBadge}
-                                </h5>
-                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">${essay.excerpt}</p>
-                            </div>`;
-                    }
-                    
-                    accordionHTML += `
-                        </div>
-                    </div>`;
-                    
-                    return accordionHTML;
-                })()}
+                <a href="#writing/${seriesId}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Explore Series (${seriesGroups[seriesName].length} Articles) &rarr;</a>
             </div>
         </div>`;
+        
+        // Generate the dedicated Series View page
+        let seriesPageHTML = `
+        <div class="article-header" style="margin-bottom: 2.5rem;">
+            <a href="#writing" class="sleek-link" style="font-size: 0.85rem; font-family: var(--font-sans); font-weight: 700; color: var(--text-muted); display: inline-block; margin-bottom: 1.5rem;">&larr; Back to Writing</a>
+            <div style="margin-bottom: 1rem;"><span class="skill-tag" style="background: var(--accent-light); color: var(--accent); border-color: var(--accent); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Series</span></div>
+            <h1 class="article-title" style="margin-bottom: 1rem; font-size: 2.2rem; font-weight: 800;">${seriesName}</h1>
+            <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7;">${seriesGroups[seriesName][0].excerpt}</p>
+        </div>
+        <div class="article-body">
+            <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; font-family: var(--font-sans); font-weight: 700;">Articles in this Series</h3>
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+        `;
+        
+        for (let essay of seriesGroups[seriesName]) {
+            const essaySlug = essay.filename.replace(/\.md$/, '');
+            seriesPageHTML += `
+                <div style="padding-left: 1rem; border-left: 3px solid var(--border);">
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.35rem;">Part ${essay.seriesPart} &bull; ${essay.date}</div>
+                    <h4 style="font-family: var(--font-sans); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;"><a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a></h4>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0;">${essay.excerpt}</p>
+                </div>
+            `;
+        }
+        
+        seriesPageHTML += `
+            </div>
+        </div>
+        `;
+        
+        fs.writeFileSync(path.join(paths.articlesDir, `${seriesId}.html`), seriesPageHTML, 'utf8');
+        console.log(`  → articles/${seriesId}.html (Series View)`);
     }
 
     // Generate HTML for Standalone Articles (Index Listing)
@@ -414,33 +415,26 @@ function main() {
         standaloneArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         essaysHTML += `
-        <div class="standalone-articles-container" style="margin-top: 3.5rem;">
-            <h3 style="font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
-                Standalone Articles
-            </h3>
-            <div style="display: flex; flex-direction: column; gap: 2.5rem;">`;
-            
+        <h2 class="section-title" style="margin-top: 2rem;">Standalone Notes</h2>
+        `;
+        
         for (let essay of standaloneArticles) {
             const essaySlug = essay.filename.replace(/\.md$/, '');
             essaysHTML += `
-            <div class="essay-item" style="border-bottom: 1px solid var(--border); padding-bottom: 2.5rem; padding-left: 0.5rem;">
-                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;">
-                    <a href="#writing/${essaySlug}" class="sleek-link">${essay.title}</a>
-                </h3>
-                <div class="essay-meta" style="margin-bottom: 0.75rem; font-size: 0.75rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; gap: 1rem;">
-                    <span>Published: ${essay.date}</span>
-                    <span>Category: ${essay.category}</span>
-                </div>
+        <div class="series-container" style="margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                <span class="skill-tag" style="background: var(--bg-offset); color: var(--text-secondary); border-color: var(--border); font-weight: 700; margin: 0; padding: 0.25rem 0.6rem; border-radius: 4px;">Note</span>
+                <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">${essay.title}</h3>
+            </div>
+            
+            <div class="essay-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0; padding-left: 0.5rem;">
                 <p class="essay-excerpt" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.75rem;">
                     ${essay.excerpt}
                 </p>
-                <a href="#writing/${essaySlug}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Read Full Article &rarr;</a>
-            </div>`;
-        }
-        
-        essaysHTML += `
+                <a href="#writing/${essaySlug}" class="sleek-link" style="font-size: 0.825rem; font-family: var(--font-sans); font-weight: 700; color: var(--accent); display: inline-block;">Read Note &rarr;</a>
             </div>
         </div>`;
+        }
     }
 
     // 4b. Write individual article fragments to articles/ directory (lazy-loaded by client)
@@ -456,7 +450,7 @@ function main() {
         
         let backLink = `<a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a>`;
         if (essay.series) {
-            backLink += ` <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('${seriesId}')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>`;
+            backLink += ` <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="#writing/${seriesId}" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>`;
         }
         
         const articleHTML = `<nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">

@@ -38,5 +38,13 @@
     "category": "Engineering Forensics",
     "series": "Forensics Case Studies",
     "seriesPart": 1
+  },
+  {
+    "slug": "mock-note",
+    "title": "The Tragedy of the Source",
+    "date": "June 29, 2026",
+    "category": "Concepts",
+    "series": null,
+    "seriesPart": null
   }
 ]

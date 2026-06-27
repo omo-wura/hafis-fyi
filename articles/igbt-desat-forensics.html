@@ -1,5 +1,5 @@
 <nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-    <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="javascript:void(0)" onclick="goBackToSeries('series-forensics-case-studies')" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+    <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="#writing/series-forensics-case-studies" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
 </nav>
 <article class="markdown-body">
     <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">IGBT Desaturation Forensics: Debugging False Trips under Light Load Currents</h1>
@@ -8,8 +8,7 @@
         <span><strong>Published:</strong> June 15, 2026</span>
         <span><strong>Category:</strong> Engineering Forensics</span>
     </div>
-    <hr>
-<h2>The Symptom</h2>
+    <h2>The Symptom</h2>
 <p>During the validation of a high-power bidirectional power converter, the system controller reported sporadic desaturation (DESAT) faults on the main switching IGBTs. Interestingly, these faults did not occur during peak power transfer or severe load steps. Instead, they tripped exclusively during the initial <strong>low-power startup sequence</strong>, when the output contactors were open and the system was operating under an extremely light auxiliary/bleeder current (typically 50–100mA).</p>
 <p>Whenever a fault was flagged, the gate driver automatically shut down the power stage within 2 microseconds to protect the silicon. This brought the entire startup sequence to a grinding halt.</p>
 <hr>
