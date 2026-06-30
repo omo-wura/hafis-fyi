@@ -46,5 +46,21 @@
     "category": "Concepts",
     "series": null,
     "seriesPart": null
+  },
+  {
+    "slug": "power-elec-industry-synth-01",
+    "title": "Power Electronics State of the Art: H1 2026 Synthesis",
+    "date": "June 27, 2026",
+    "category": "Synthesis",
+    "series": "Power Electronics: Industry Synthesis",
+    "seriesPart": 1
+  },
+  {
+    "slug": "vintage-patents-01",
+    "title": "US Patent 3,040,271: The original switchmode converter",
+    "date": "June 27, 2026",
+    "category": "Concepts",
+    "series": "Vintage Patents: The Dissection Series",
+    "seriesPart": 1
   }
 ]

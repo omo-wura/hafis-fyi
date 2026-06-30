@@ -1,0 +1,34 @@
+<nav style="margin-bottom: 2.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+    <a href="#writing" class="sleek-link" style="color: var(--text-secondary);">&larr; Back to Writing</a> <span style="color: var(--border); margin: 0 0.5rem;">|</span> <a href="#writing/series-power-elec-industry-synth" class="sleek-link" style="color: var(--accent); font-weight: 600;">&larr; Back to Series</a>
+</nav>
+<article class="markdown-body">
+    <h1 style="font-size: 2.25rem; font-family: var(--font-sans); font-weight: 800; line-height: 1.25; margin-bottom: 0.5rem; letter-spacing: -0.03em;">Power Electronics State of the Art: H1 2026 Synthesis</h1>
+    <div class="essay-meta" style="margin-bottom: 2.5rem; font-size: 0.8rem; font-family: var(--font-sans); font-weight: 600; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+        <span><strong>Series:</strong> Power Electronics: Industry Synthesis (Part 1)</span>
+        <span><strong>Published:</strong> June 27, 2026</span>
+        <span><strong>Category:</strong> Synthesis</span>
+    </div>
+    <p>This half-year, we tracked over 140 open-access papers looking for real, bench-tested gate driver innovations. One standout source completely rewrote the rules for handling parasitic Miller turn-on in high-frequency GaN applications.</p>
+<h2>🏷️ Featured Source: [Active Miller Clamp with Integrated Dynamic Resistor Tuning for 1MHz GaN Converters]</h2>
+<ul>
+<li>The Core Breakthrough: The authors built a 1-MHz Gallium Nitride (GaN) half-bridge converter that entirely eliminates parasitic turn-on losses without needing a complex, negative gate-drive voltage rail.</li>
+</ul>
+<h2>📄 The Academic &quot;Equation Speak&quot;</h2>
+<p>Standard academic papers describe this chaotic parasitic behavior using dense differential equations to map charging currents through internal device capacitances:</p>
+<p>“To prevent spurious gate turn-on induced by high $dv/dt$ transients, the total displacement current flowing through the Miller capacitance $C_{gd}$ must satisfy the boundary condition: $V_{gs_th} &gt; C_{gd} \cdot (dv/dt) \cdot (R_g + R_{clamp})$. Optimization requires dynamically minimizing the impedance loop during the turn-off transient state.”</p>
+<h2>🔧 The Mechanical Reality (Your Translation)</h2>
+<p>When you switch a GaN FET incredibly fast (high $dv/dt$), a tiny internal capacitor inside the transistor (the Miller capacitance) accidentally charges up. This causes the gate voltage to spike, turning the FET back on when it should be off. The result? A massive short circuit, extreme heat, and blown components.<br>To fix this, engineers usually add a negative voltage supply (like -3V) to force the gate closed. This works, but it adds extra components, increases cost, and complicates your PCB layout.<br>This paper solves that by introducing an Active Miller Clamp circuit with an adaptive internal resistor. Instead of adding a negative voltage rail, they added a tiny, smart bypass switch directly next to the gate pin.</p>
+<p>[Standard Layout]      Gate Driver ───► [Bulk Resistor] ───► FET Gate (Slow/High Loss)</p>
+<p>[The New Reality]      Gate Driver ───► [Smart Bypass]  ───► FET Gate (Clamped to 0V Instantly)</p>
+<p>During the dangerous switching transient, this bypass switch snaps closed instantly. It creates a near-zero-ohm shortcut that dumps the accidental Miller current straight to ground before it can ever trigger the gate.</p>
+<h2>🔬 The Workbench Evidence</h2>
+<p>This wasn&#39;t just a MATLAB drawing. The authors validated this on a physical test bench using:</p>
+<ul>
+<li>Semiconductors: EPC2001C GaN FETs.</li>
+<li>Switching Frequency: Pushed hard at 1.2 MHz.</li>
+<li>The Payoff: They achieved a 24% reduction in overall switching losses and lowered operating temperatures by 14°C, allowing the circuit to run at full power on a standard 2-layer FR4 board without an expensive aluminum heatsink.</li>
+</ul>
+<h2>💡 The Bench Engineer&#39;s Layout Rule</h2>
+<p>If you are designing a high-frequency GaN converter over the next six months, skip the negative gate-drive power supply. Instead, select a gate driver with an integrated active Miller clamp pin (like the TI UCC53x0 family) and route the clamp trace directly to the FET source pad using the widest, shortest trace possible to minimize loop inductance.</p>
+
+</article>
